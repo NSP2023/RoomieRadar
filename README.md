@@ -1,5 +1,6 @@
 # RoomieRadar
 Roommate Compatibility Checker
+
 Find your perfect roommate match with RoomieRadar – a warm, friendly, and interactive web application that helps you check compatibility with potential roommates based on lifestyle habits.
 
 🏠 Overview
