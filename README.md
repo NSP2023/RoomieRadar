@@ -1,4 +1,4 @@
-<img width="1897" height="871" alt="image" src="https://github.com/user-attachments/assets/9f4292f5-49c4-438b-8822-47e27756844c" /># 🏡 RoomieRadar
+<img width="1897" height="871" alt="image" src="https://github.com/user-attachments/assets/9f4292f5-49c4-438b-8822-47e27756844c" />
 
 **Roommate Compatibility Checker**
 
