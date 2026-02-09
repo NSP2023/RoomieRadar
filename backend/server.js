@@ -4,10 +4,11 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const passport = require('passport');
 dotenv.config();
 
 //const morgan = require('morgan'); // optional logging
-
+require('./src/config/passport'); 
 // =======================
 // Initialize Express App
 // =======================
