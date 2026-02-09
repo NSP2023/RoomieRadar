@@ -10,6 +10,8 @@ RoomieRadar is a full-stack MERN web application that helps users find compatibl
 
 ### Core Functionality
 
+<img width="1897" height="868" alt="cute" src="https://github.com/user-attachments/assets/bf5f701d-7658-450c-96ff-aa96601b0eb8" />
+
 * Multi-step lifestyle questionnaire
 * Weighted compatibility scoring algorithm
 * Results dashboard with radar charts and personality labels
@@ -17,11 +19,15 @@ RoomieRadar is a full-stack MERN web application that helps users find compatibl
 * One-day shared living simulation
 
 ### Roommate Match System
+<img width="1905" height="870" alt="image" src="https://github.com/user-attachments/assets/9f8b8b6a-b005-4de2-9e50-117bf69673c2" />
+
 
 * List of potential roommates with compatibility scores
 * Highlighted top matches with badges
 * Clickable profile cards with detailed daily simulations
 * Optional side-by-side roommate comparison
+<img width="1885" height="856" alt="image" src="https://github.com/user-attachments/assets/087b5858-91e8-44b4-8b5a-d4882510bbfc" />
+
 
 ### UI & Interaction
 
