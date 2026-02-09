@@ -4,7 +4,7 @@ const JwtStrategy = require('passport-jwt').Strategy,  //A Passport strategy is 
                                             // social logins (Google, Facebook), or JSON Web Tokens (JWT).
     ExtractJwt = require('passport-jwt').ExtractJwt;
 const opts = {}
-const UserModel = require('../models/userModel')
+const UserModel = require('../models/User')
 const passport = require('passport')
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
