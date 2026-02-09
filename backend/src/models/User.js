@@ -24,26 +24,46 @@ const UserSchema = new mongoose.Schema(
       minlength: 6,
     },
 
-    // Lifestyle questionnaire answers
-    lifestyle: {
-      sleep: { type: String, enum: ['Early', 'Late', 'Flexible'], default: 'Flexible' },
-      cleanliness: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
-      noiseTolerance: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
-      // You can add more categories here
-    },
+    avatar: { type: String, default: "" },
+    bio: { type: String, default: "" },
+    location: { type: String, default: "" },
+    
 
-    // Optional: personality label (calculated from answers)
+    //personality label (calculated from answers)
     personality: {
       type: String,
       default: '',
     },
 
-    // Optional: user preferences for roommate matching
+    
     preferences: {
-      sleep: { type: String, enum: ['Early', 'Late', 'Flexible'], default: 'Flexible' },
-      cleanliness: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
-      noiseTolerance: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
+      sleep: { 
+        type: String, 
+        enum: ['early', 'night', 'midnight'], 
+        default: 'night' 
+      },
+      noise: { 
+        type: String, 
+        enum: ['sensitive', 'moderate', 'easy'], 
+        default: 'moderate' 
+      },
+      cleanliness: { 
+        type: String, 
+        enum: ['meticulous', 'balanced', 'relaxed'], 
+        default: 'balanced' 
+      },
+      temperature: { 
+        type: String, 
+        enum: ['cool', 'justRight', 'warm'], 
+        default: 'justRight' 
+      },
+      social: { 
+        type: String, 
+        enum: ['introvert', 'balancedSocial', 'social'], 
+        default: 'balancedSocial' 
+      },
     },
+
   },
   {
     timestamps: true, // Adds createdAt & updatedAt

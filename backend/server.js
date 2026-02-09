@@ -26,9 +26,16 @@ app.use(express.urlencoded({ extended: true }));
 // =======================
 // Routes
 // =======================
-app.use('/api/matches', require('./routes/matchRoutes'));
-app.use('/api/compatibility', require('./routes/compatibilityRoutes'));
-app.use('/api/users', require('./routes/userRoutes')); 
+const authRoutes = require('./src/routes/authRoutes');
+const userRoutes = require('./src/routes/userRoutes');
+const compatibilityRoutes = require('./src/routes/compatibilityRoutes');
+const matchRoutes = require('./src/routes/matchRoutes');
+
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/compatibility', compatibilityRoutes);
+app.use('/api/matches', matchRoutes);
+
 // Health check
 app.get('/', (req, res) => res.send('RoomieRadar Mock Backend is running!'));
 
@@ -39,3 +46,6 @@ app.get('/', (req, res) => res.send('RoomieRadar Mock Backend is running!'));
 // =======================
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Mock server running on port ${PORT}`));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch(err => console.error("❌ MongoDB connection failed:", err.message));
