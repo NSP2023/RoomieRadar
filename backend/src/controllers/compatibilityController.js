@@ -9,7 +9,7 @@ const RoommateMatch = require('../models/RoommateMatch');
  */
 const calculateCompatibility = (userAnswers, otherAnswers) => {
   let score = 0;
-  const totalCategories = 3; // sleep, cleanliness, noiseTolerance
+  const totalCategories = 5; // sleep, cleanliness, noiseTolerance,temperature,social
 
   // Sleep compatibility
   if (userAnswers.sleep === otherAnswers.sleep) score += 1;
@@ -17,6 +17,10 @@ const calculateCompatibility = (userAnswers, otherAnswers) => {
   if (userAnswers.cleanliness === otherAnswers.cleanliness) score += 1;
   // Noise tolerance
   if (userAnswers.noiseTolerance === otherAnswers.noiseTolerance) score += 1;
+  // Temperature 
+  if (userAnswers.temperature === otherAnswers.temperature) score += 1;
+  // Social 
+  if (userAnswers.social === otherAnswers.social) score += 1;
 
   return (score / totalCategories) * 100; // convert to 0-100 scale
 };
@@ -26,7 +30,7 @@ const calculateCompatibility = (userAnswers, otherAnswers) => {
  */
 const generateConflictForecast = (userAnswers, otherAnswers) => {
   const forecast = {};
-  const categories = ['sleep', 'cleanliness', 'noiseTolerance'];
+  const categories = ['sleep', 'cleanliness', 'noiseTolerance','temperature','social'];
 
   categories.forEach((cat) => {
     if (userAnswers[cat] === otherAnswers[cat]) {
