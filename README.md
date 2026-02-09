@@ -1,68 +1,68 @@
-# RoomieRadar
-Roommate Compatibility Checker
+<img width="1897" height="871" alt="image" src="https://github.com/user-attachments/assets/9f4292f5-49c4-438b-8822-47e27756844c" /># 🏡 RoomieRadar
 
-Find your perfect roommate match with RoomieRadar – a warm, friendly, and interactive web application that helps you check compatibility with potential roommates based on lifestyle habits.
+**Roommate Compatibility Checker**
 
-🏠 Overview
+RoomieRadar is a full-stack MERN web application that helps users find compatible roommates based on lifestyle preferences such as sleep habits, noise tolerance, and cleanliness. The platform provides compatibility scores, conflict predictions, and practical insights to support better shared-living decisions.
 
-RoomieRadar is a full-stack MERN web application that allows users to:
+---
 
-Answer lifestyle questions about sleep, noise tolerance, and cleanliness
+## 🚀 Features
 
-Get a compatibility score with potential roommates
+### Core Functionality
 
-See visual conflict forecasts and a one-day simulation of shared living
+* Multi-step lifestyle questionnaire
+* Weighted compatibility scoring algorithm
+* Results dashboard with radar charts and personality labels
+* Conflict forecast highlighting potential friction areas
+* One-day shared living simulation
 
-Explore a Roommate Match section with detailed insights and top matches
+### Roommate Match System
 
-Receive practical tips to improve compatibility
+* List of potential roommates with compatibility scores
+* Highlighted top matches with badges
+* Clickable profile cards with detailed daily simulations
+* Optional side-by-side roommate comparison
 
-The design emphasizes a warm and welcoming interface, making the experience feel like a digital hug.
+### UI & Interaction
 
-🎯 Features
-Core Features
+* “What-If” preference slider for dynamic result updates
+* Warm, minimal UI with rounded cards and soft shadows
+* Fully responsive design for mobile and desktop
 
-Multi-step lifestyle questionnaire
+---
 
-Weighted compatibility scoring system
+## 🛠 Tech Stack
 
-Results dashboard with radar charts and personality labels
+**Frontend**
 
-Conflict forecast highlighting potential friction
+* React.js
+* HTML5, CSS3
+* Chart.js
 
-One-day roommate simulation timeline
+**Backend**
 
-Roommate Match Section
+* Node.js
+* Express.js
 
-Lists potential roommates with compatibility scores
+**Database**
 
-Highlights top matches with badges
+* MongoDB (Mongoose)
 
-Clickable cards to see detailed one-day simulations
+**State Management**
 
-Optional: compare two roommates side by side
+* React Hooks / Context API
 
-Interactive Enhancements
+**Deployment (Optional)**
 
-“What-If” slider for adjusting preferences and seeing updated results
+* Vercel
+* Render
+* Heroku
 
-Warm, cozy color theme with rounded cards and soft shadows
+---
 
-Mobile responsive design
+## 📁 Project Structure
 
-🛠️ Technology Stack
-
-Frontend: React.js, HTML, CSS, Chart.js
-
-Backend: Node.js, Express.js
-
-Database: MongoDB (Mongoose)
-
-State Management: React Hooks / Context API
-
-Deployment: Vercel / Render / Heroku (optional)
-
-📁 File Structure
+```
 roomie-radar/
 ├── frontend/
 │   ├── public/
@@ -88,56 +88,65 @@ roomie-radar/
 │   │   └── server.js
 ├── README.md
 └── .gitignore
+```
 
-⚡ Setup & Installation
-Backend
+---
+
+## ⚙️ Installation & Setup
+
+### Backend
+
+```bash
 cd backend
 npm install
-npm run dev   # Starts backend server on http://localhost:5000
+npm run dev
+```
 
-Frontend
+Runs on: `http://localhost:5000`
+
+### Frontend
+
+```bash
 cd frontend
 npm install
-npm run dev   # Starts frontend server on http://localhost:3000
+npm run dev
+```
 
+Runs on: `http://localhost:3000`
 
-Make sure MongoDB is running locally or provide a connection string in .env
+> Ensure MongoDB is running locally or use a cloud MongoDB URI.
 
-🔧 Environment Variables
+---
 
-Create a .env file in /backend:
+## 🔐 Environment Variables
 
+Create a `.env` file inside `/backend`:
+
+```
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
+```
 
-🖼️ Screenshots (Optional)
+## 📌 Future Improvements
 
-Landing Page – Cozy, welcoming hero section
+* Export compatibility reports (PDF / JSON)
+* Dark / light mode toggle
+* Save multiple roommate profiles
+* Smooth animations for charts and match highlights
 
-Questionnaire Page – Multi-step questions with progress bar
+---
 
-Results Dashboard – Radar chart + compatibility score + tips
+## 👩‍💻 Contributors
 
-Roommate Match Section – Highlighted top matches
-
-(Add screenshots after building the UI)
-
-📈 Future Enhancements
-
-Export compatibility reports (PDF/JSON)
-
-Dark/light mode toggle
-
-Save multiple profiles for later comparison
-
-Smooth animations for radar charts and match highlights
-
-👩‍💻 Authors
-
-Noshin Syara, Tasnia Rahman Maha, Maliha Mehnaj
+* **Noshin Syara**
+* **Tasnia Rahman Maha**
+* **Maliha Mehnaj**
 
 Islamic University of Technology (IUT)
 
-📄 License
+---
 
-MIT License
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
