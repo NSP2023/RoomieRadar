@@ -43,7 +43,7 @@ const getTopMatchesController = async (req, res) => {
     });
   }
 };
-...
+
 module.exports = {
   getTopMatchesController,
   getSimulationController,
