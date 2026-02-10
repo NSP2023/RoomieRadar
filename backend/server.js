@@ -28,12 +28,12 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 // =======================
 const authRoutes = require('./src/routes/authRoutes');
-const userRoutes = require('./src/routes/userRoutes');
+//const userRoutes = require('./src/routes/userRoutes');
 const compatibilityRoutes = require('./src/routes/compatibilityRoutes');
 const matchRoutes = require('./src/routes/matchRoutes');
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api/users', authRoutes);
+//app.use('/api/users', userRoutes);
 app.use('/api/compatibility', compatibilityRoutes);
 app.use('/api/matches', matchRoutes);
 
