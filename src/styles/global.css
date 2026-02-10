@@ -1,0 +1,197 @@
+/* D:\RoomieRadar\frontend\src\styles\global.css */
+
+/* Global resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Containers */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--padding);
+}
+
+/* Headings */
+.heading-orange {
+  color: var(--primary-color);
+  font-size: var(--heading-font-size);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Grid layout for cards */
+.grid-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card styles */
+.card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  box-shadow: var(--shadow);
+  border: 1px solid #ddd;
+}
+
+/* Highlighted card */
+.card.highlight {
+  border: 2px solid var(--primary-color);
+}
+
+/* Buttons */
+.button-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: var(--button-padding);
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.button-primary:hover {
+  background-color: #e35b50;
+}
+
+.button-secondary {
+  background-color: #f3f3f3;
+  color: var(--text-color);
+  padding: var(--button-padding);
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-background);
+  padding: var(--padding);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--padding);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-links .link {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.navbar-links .active-link {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: var(--card-background);
+  padding: var(--padding);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+}
+
+.sidebar-title {
+  font-weight: bold;
+  font-size: var(--heading-font-size);
+  margin-bottom: 1rem;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.active-sidebar-link {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Main layout */
+.main-layout {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* Slider wrapper */
+.slider-wrapper {
+  margin-bottom: 1rem;
+}
+
+.slider-label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+/* Utility classes */
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff5f7 0%, #f0f8ff 100%);
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  text-align: center;
+}
