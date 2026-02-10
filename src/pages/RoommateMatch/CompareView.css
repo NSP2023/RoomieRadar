@@ -1,0 +1,323 @@
+/* CompareView.css - Kawaii Cozy Side-by-Side Comparison */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comic+Neue:wght@400;700&display=swap');
+
+:root {
+  --coral: #ff7b8c;
+  --light-coral: #ffb3c1;
+  --soft-orange: #ffcc99;
+  --warm-peach: #ffe5d9;
+  --light-brown: #d9a78c;
+  --sienna: #a66f5c;
+  --cream: #fff5f0;
+  --mint: #a7e6d7;
+  --shadow-cozy: 0 10px 30px rgba(166, 111, 92, 0.2);
+  --shadow-playful: 0 14px 40px rgba(255, 123, 140, 0.28);
+}
+
+.compare-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--warm-peach) 0%, #fff0e6 50%, var(--light-coral) 100%);
+  padding: 7rem 1.5rem 4rem;
+  font-family: 'Nunito', system-ui, sans-serif;
+  position: relative;
+}
+
+.compare-page::before,
+.compare-page::after {
+  content: '💕';
+  position: absolute;
+  font-size: 9rem;
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+}
+
+.compare-page::before { top: 12%; left: 6%; transform: rotate(-10deg); }
+.compare-page::after  { bottom: 15%; right: 8%; transform: rotate(15deg); }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.page-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 3.4rem;
+  color: var(--coral);
+  text-align: center;
+  margin-bottom: 0.6rem;
+  text-shadow: 
+    0 0 10px rgba(255, 123, 140, 0.6),
+    0 0 20px rgba(255, 123, 140, 0.4),
+    0 0 30px rgba(255, 123, 140, 0.25);
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--sienna);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .comparison-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.profile-column {
+  background: rgba(255, 245, 240, 0.94);
+  border-radius: 28px;
+  padding: 2.2rem 1.8rem;
+  border: 3px solid var(--light-coral);
+  box-shadow: var(--shadow-cozy);
+  position: relative;
+}
+
+.you-column {
+  border-color: var(--coral);
+  background: linear-gradient(135deg, rgba(255,245,240,0.98), rgba(255,179,193,0.15));
+}
+
+.match-column {
+  border-color: var(--mint);
+}
+
+.column-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 3px dashed;
+}
+
+.you-column .column-title { color: var(--coral); border-color: var(--coral); }
+.match-column .column-title { color: #4a9c8c; border-color: var(--mint); }
+
+.avatar-container {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid white;
+  box-shadow: 0 8px 25px rgba(166,111,92,0.35);
+}
+
+.name {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--sienna);
+  text-align: center;
+  margin: 0.8rem 0 0.3rem;
+}
+
+.score-big {
+  font-size: 3.6rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 0.8rem 0 1.5rem;
+}
+
+.you-column .score-big { color: var(--coral); }
+.match-column .score-big { color: #4a9c8c; }
+
+.details-list {
+  margin-top: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.9rem 0;
+  border-bottom: 1px dashed var(--light-brown);
+  font-size: 1.08rem;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--sienna);
+}
+
+.detail-value {
+  color: var(--coral);
+  font-weight: 700;
+}
+
+.match-column .detail-value {
+  color: #4a9c8c;
+}
+
+/* ──────────────────────────────────────────────── */
+/* Contact Section */
+
+.contact-section {
+  margin-top: 2.2rem;
+  text-align: center;
+  position: relative;
+}
+
+.contact-btn {
+  background: linear-gradient(90deg, #4a9c8c, var(--mint));
+  color: white;
+  border: none;
+  padding: 0.95rem 2.4rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: 0 8px 25px rgba(167, 230, 215, 0.45);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(167, 230, 215, 0.6);
+}
+
+.contact-info-popup {
+  margin-top: 1.2rem;
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-playful);
+  border: 2px solid var(--mint);
+  animation: fadeIn 0.3s ease;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 0;
+  border-bottom: 1px dashed var(--light-brown);
+}
+
+.contact-row:last-child {
+  border-bottom: none;
+}
+
+.contact-label {
+  font-weight: 600;
+  color: var(--sienna);
+  font-size: 1.05rem;
+  flex: 0 0 90px;
+}
+
+.contact-value {
+  color: var(--coral);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s;
+  flex-grow: 1;
+}
+
+.contact-value:hover {
+  color: #ff5f7a;
+}
+
+.whatsapp {
+  color: #25D366;
+}
+
+.whatsapp:hover {
+  color: #128C7E;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--sienna);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  margin-left: 1rem;
+}
+
+.copy-btn:hover {
+  color: var(--coral);
+  background: var(--warm-peach);
+  transform: scale(1.15);
+}
+
+/* Back Button */
+.back-btn {
+  display: block;
+  margin: 3.5rem auto 1rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--coral), var(--soft-orange));
+  color: white;
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(255,123,140,0.45);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(255,123,140,0.55);
+}
+
+/* Loading / Error */
+.loading, .error {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--sienna);
+  margin: 5rem 0;
+}
+
+.error { color: #ff5f7a; }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .profile-column {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+/* Show the actual chosen text below the score */
+.answer-text {
+  display: block;
+  font-size: 0.92rem;
+  color: #8a7580;
+  margin-top: 0.35rem;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+/* Make sure detail items have enough height for two lines */
+.detail-item {
+  min-height: 80px; /* adjust as needed */
+  padding: 1rem 0;
+}
+
+/* Optional: highlight when answers are very different */
+.detail-item.diff-highlight .detail-value {
+  color: #f44336;
+  font-weight: 700;
+}

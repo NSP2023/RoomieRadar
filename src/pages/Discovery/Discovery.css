@@ -1,0 +1,210 @@
+/* Discovery.css - Tinder-style Swipe Discovery */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comic+Neue:wght@400;700&display=swap');
+
+:root {
+  --coral: #ff7b8c;
+  --light-coral: #ffb3c1;
+  --soft-orange: #ffcc99;
+  --warm-peach: #ffe5d9;
+  --sienna: #a66f5c;
+  --cream: #fff5f0;
+  --shadow-cozy: 0 12px 35px rgba(166, 111, 92, 0.25);
+  --shadow-playful: 0 16px 45px rgba(255, 123, 140, 0.35);
+}
+
+.discovery-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--warm-peach) 0%, #fff0e6 50%, var(--light-coral) 100%);
+  padding: 7rem 1rem 4rem;
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 3.4rem;
+  color: var(--coral);
+  text-align: center;
+  margin-bottom: 0.4rem;
+  text-shadow: 4px 4px 0 var(--soft-orange);
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--sienna);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+}
+
+/* Card Container + Swipe Animation */
+.card-container {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 520px;
+  margin: 0 auto 2rem;
+  perspective: 1000px;
+}
+
+.profile-card {
+  position: absolute;
+  inset: 0;
+  background: white;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow-playful);
+  border: 3px solid var(--light-coral);
+  transform-origin: center;
+  transition: all 0.4s ease;
+}
+
+.swipe-left .profile-card {
+  transform: translateX(-120%) rotate(-25deg);
+  opacity: 0;
+}
+
+.swipe-right .profile-card {
+  transform: translateX(120%) rotate(25deg);
+  opacity: 0;
+}
+
+/* Profile Content */
+.profile-avatar {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-bottom: 4px solid var(--soft-orange);
+}
+
+.profile-info {
+  padding: 1.5rem 1.8rem;
+  text-align: center;
+}
+
+.profile-name {
+  font-family: 'Comic Neue', cursive;
+  font-size: 2.4rem;
+  color: var(--sienna);
+  margin: 0 0 0.3rem;
+}
+
+.profile-university {
+  color: #8c6f66;
+  font-size: 1.15rem;
+  margin: 0 0 0.8rem;
+}
+
+.compatibility-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--coral), var(--soft-orange));
+  color: white;
+  font-weight: 700;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  margin: 0.6rem 0 1rem;
+  font-size: 1.2rem;
+}
+
+.profile-bio {
+  color: #6b4e43;
+  line-height: 1.45;
+  font-size: 1.05rem;
+  margin-top: 0.8rem;
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 1.8rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 6px 20px rgba(37, 213, 102, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 10px 25px rgba(37, 213, 102, 0.55);
+}
+
+/* Swipe Buttons */
+.swipe-actions {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-top: 1.5rem;
+}
+
+.swipe-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  font-size: 2.8rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.reject {
+  background: #ff5252;
+  color: white;
+}
+
+.reject:hover {
+  transform: scale(1.12);
+}
+
+.accept {
+  background: #4caf50;
+  color: white;
+}
+
+.accept:hover {
+  transform: scale(1.12);
+}
+
+/* Empty State */
+.empty-state .no-more {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.empty-state h2 {
+  font-size: 2.5rem;
+  color: var(--coral);
+  margin-bottom: 1rem;
+}
+
+.back-to-matches,
+.back-to-list {
+  margin: 2rem auto;
+  display: block;
+  padding: 1rem 2.2rem;
+  background: linear-gradient(90deg, var(--coral), var(--soft-orange));
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 8px 25px rgba(255,123,140,0.45);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.back-to-matches:hover,
+.back-to-list:hover {
+  transform: translateY(-4px);
+}
