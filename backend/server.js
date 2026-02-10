@@ -38,7 +38,31 @@ app.use('/api/compatibility', compatibilityRoutes);
 app.use('/api/matches', matchRoutes);
 
 // Health check
-app.get('/', (req, res) => res.send('RoomieRadar Mock Backend is running!'));
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ 
+    success: true, 
+    message: 'RoomieRadar API is running!',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ 
+    success: false, 
+    message: 'Route not found' 
+  });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Global error:', err);
+  res.status(500).json({ 
+    success: false, 
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
 
 
 
