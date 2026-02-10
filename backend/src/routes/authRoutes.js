@@ -3,7 +3,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const User = require("../models/User");
-
+const RoommateMatch = require("../models/RoommateMatch");
+const {calculateCompatibility,generateConflictForecast,getBadge} = require("../services/CompatibilityService");
+const {generateSimulation} = require("../services/SimulationService");
 const router = express.Router();
 
 /* REGISTER */
@@ -64,8 +66,9 @@ router.post("/register", async (req, res) => {
         avatar: user.avatar,
         lifestyle: user.lifestyle,
         preferences: user.preferences,
+        bio: user.bio,
       },
-      token: "Bearer " + token,
+      token: token,
     });
   } catch (error) {
     console.error("Registration error:", error);
@@ -126,11 +129,10 @@ router.post("/login", async (req, res) => {
         hall: user.hall,
         bio: user.bio,
         avatar: user.avatar,
-        whatsapp: user.whatsapp,
         lifestyle: user.lifestyle,
         preferences: user.preferences,
       },
-      token: "Bearer " + token,
+      token: token,
     });
   } catch (error) {
     console.error("Login error:", error);
@@ -145,25 +147,43 @@ router.post("/login", async (req, res) => {
 router.get(
   "/profile",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.status(200).json({
-      success: true,
-      user: {
-        id: req.user._id,
-        name: req.user.name,
-        email: req.user.email,
-        age: req.user.age,
-        university: req.user.university,
-        department: req.user.department,
-        year: req.user.year,
-        hall: req.user.hall,
-        bio: req.user.bio,
-        avatar: req.user.avatar,
-        whatsapp: req.user.whatsapp,
-        lifestyle: req.user.lifestyle,
-        preferences: req.user.preferences,
-      },
-    });
+  async (req, res) => {
+    try{
+        const userId=req.user._id;
+        const roommateMatch = await RoommateMatch.findOne({ user: userId })
+        .populate('matches.roommate', 'lifestyle preferences').lean;
+        let bestMatch = null;
+        if(roommateMatch && roommateMatch.matches.length>0){
+            const sortedMatches = roommateMatch.matches.sort((a,b)=>(b.compatibilityScore||0) - (a.compatibilityScore||0));
+            bestMatch= sortedMatches[0]?.roommate?.lifestyle || null;
+        }
+        res.status(200).json({
+            success:true,
+            user:{
+                id: req.user._id,
+                name: req.user.name,
+                email: req.user.email,
+                age: req.user.age,
+                university: req.user.university,
+                department: req.user.department,
+                year: req.user.year,
+                hall: req.user.hall,
+                bio: req.user.bio,
+                avatar: req.user.avatar,
+                lifestyle: req.user.lifestyle,
+                preferences: req.user.preferences,
+            },
+            bestMatchLifestyle: bestMatch
+        });
+    }
+    catch(error){
+        console.error("Get profile error:", error);
+        res.status(500).json({
+            success:false,
+            message:"Server error while fetching profile",
+            error: error.message
+        });
+    }
   }
 );
 
@@ -183,7 +203,8 @@ router.put(
           message: "User not found" 
         });
       }
-
+      // Track if lifestyle was updated (to trigger match generation)
+      const lifestyleUpdated = !!updates.lifestyle;
       // Update lifestyle
       if (updates.lifestyle) {
         user.lifestyle = { ...user.lifestyle, ...updates.lifestyle };
@@ -197,7 +218,7 @@ router.put(
       // Update profile fields
       const profileFields = [
         'name', 'bio', 'university', 'department', 
-        'year', 'hall', 'age', 'whatsapp'
+        'year', 'hall', 'age', 'avatar'
       ];
       
       profileFields.forEach((field) => {
@@ -208,9 +229,65 @@ router.put(
 
       await user.save();
 
+      // AUTO-GENERATE MATCHES if lifestyle was updated
+      if (lifestyleUpdated) {
+        try {
+          console.log('Auto-generating matches for user:', userId);
+          
+          // Fetch all other users
+          const otherUsers = await User.find({ 
+            _id: { $ne: userId } 
+          }).select('name email age university hall whatsapp avatar bio lifestyle');
+
+          if (otherUsers.length > 0) {
+            // Calculate compatibility for each user
+            const matches = otherUsers
+              .map((other) => {
+                try {
+                  const compatibilityScore = calculateCompatibility(user.lifestyle, other.lifestyle);
+                  const conflictForecast = generateConflictForecast(user.lifestyle, other.lifestyle);
+                  const simulation = generateSimulation(user.lifestyle, other.lifestyle);
+                  const badges = getBadges(compatibilityScore);
+
+                  return {
+                    roommate: other._id,
+                    compatibilityScore,
+                    conflictForecast,
+                    simulation,
+                    badges,
+                  };
+                } catch (error) {
+                  console.error(`Error calculating match with user ${other._id}:`, error);
+                  return null;
+                }
+              })
+              .filter(match => match !== null)
+              .sort((a, b) => b.compatibilityScore - a.compatibilityScore);
+
+            // Save or update matches
+            let roommateMatch = await RoommateMatch.findOne({ user: userId });
+            
+            if (roommateMatch) {
+              roommateMatch.matches = matches;
+              roommateMatch.updatedAt = Date.now();
+            } else {
+              roommateMatch = new RoommateMatch({ 
+                user: userId, 
+                matches 
+              });
+            }
+
+            await roommateMatch.save();
+            console.log('Auto-generated', matches.length, 'matches for user:', userId);
+          }
+        } catch (error) {
+          console.error("Match generation error:", error);
+        }
+      }
+
       res.status(200).json({
         success: true,
-        message: "Profile updated successfully!",
+        message: "Profile updated successfully",
         user: {
           id: user._id,
           name: user.name,
@@ -222,7 +299,6 @@ router.put(
           hall: user.hall,
           bio: user.bio,
           avatar: user.avatar,
-          whatsapp: user.whatsapp,
           lifestyle: user.lifestyle,
           preferences: user.preferences,
         },
@@ -243,7 +319,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const user = await User.findById(req.params.id);
+      const user = await User.findById(req.params.id).select('-password');
       
       if (!user) {
         return res.status(404).json({ 
@@ -264,7 +340,6 @@ router.get(
         hall: user.hall,
         bio: user.bio,
         avatar: user.avatar,
-        whatsapp: user.whatsapp,
         lifestyle: user.lifestyle,
       });
     } catch (error) {
