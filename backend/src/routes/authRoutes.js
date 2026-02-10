@@ -11,7 +11,7 @@ const router = express.Router();
 /* REGISTER */
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, age, university, department, year, hall } = req.body;
+    const { name, email, password, age, university, department, year, hall, whatsapp } = req.body;
 
     // Validation
     if (!name || !email || !password) {
@@ -129,6 +129,7 @@ router.post("/login", async (req, res) => {
         hall: user.hall,
         bio: user.bio,
         avatar: user.avatar,
+        whatsapp: user.whatsapp,
         lifestyle: user.lifestyle,
         preferences: user.preferences,
       },
