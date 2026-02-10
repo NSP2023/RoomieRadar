@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema(
         return `https://api.dicebear.com/9.x/avataaars/svg?seed=${this._id || this.name || 'user'}&backgroundColor=ffdfbf`;
       },
     },
-
+    whatsapp: { type: String }, 
     //  Lifestyle 
     lifestyle: {
       cleanliness: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
@@ -44,14 +44,15 @@ const UserSchema = new mongoose.Schema(
     // Preferences (What they want in a roomie) 
     
     preferences: {
-      cleanliness: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
-      sleep: { type: String, enum: ['Early', 'Late', 'Flexible'], default: 'Flexible' },
-      noiseTolerance: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
-      guests: { type: String, enum: ['Rarely', 'Sometimes', 'Often'], default: 'Sometimes' },
-      sharing: { type: String, enum: ['Private', 'Flexible', 'Shared'], default: 'Flexible' },
-      conflict: { type: String, enum: ['Avoidant', 'Calm', 'Immediate'], default: 'Calm' },
-    },
+    cleanliness: { type: Number, min: 1, max: 10, default: 5 },
+    sleep: { type: Number, min: 1, max: 10, default: 5 },
+    noiseTolerance: { type: Number, min: 1, max: 10, default: 5 }, 
+    guests: { type: Number, min: 1, max: 10, default: 5 },
+    sharing: { type: Number, min: 1, max: 10, default: 5 },
+    conflict: { type: Number, min: 1, max: 10, default: 5 },
+    pets: { type: Number, min: 1, max: 10, default: 5 }
   },
+    },
   { timestamps: true }
 );
 module.exports = mongoose.model('User', UserSchema);
