@@ -1,11 +1,8 @@
 // backend/src/services/compatibilityService.js
 
-/**
- * Calculate compatibility score between two users
- * Returns a number between 0 and 100
- * @param {Object} userAnswers - Lifestyle answers of user
- * @param {Object} otherAnswers - Lifestyle answers of other user
- */
+
+//Calculate compatibility score between two users,Returns a number between 0 and 100
+ 
 const calculateCompatibility = (userAnswers, otherAnswers) => {
   let score = 0;
   const totalCategories = 3; // sleep, cleanliness, noiseTolerance
@@ -22,12 +19,8 @@ const calculateCompatibility = (userAnswers, otherAnswers) => {
   return (score / totalCategories) * 100; // convert to 0-100 scale
 };
 
-/**
- * Generate a conflict forecast between two users
- * Returns an object like: { sleep: 'Low', cleanliness: 'Medium', noiseTolerance: 'High' }
- * @param {Object} userAnswers
- * @param {Object} otherAnswers
- */
+//Generate a conflict forecast between two users
+
 const generateConflictForecast = (userAnswers, otherAnswers) => {
   const forecast = {};
   const categories = ['sleep', 'cleanliness', 'noiseTolerance'];
@@ -48,10 +41,9 @@ const generateConflictForecast = (userAnswers, otherAnswers) => {
   return forecast;
 };
 
-/**
- * Generate a "Top Match" badge based on compatibility score
- * @param {Number} score - compatibility score 0-100
- */
+ //"Top Match" badge based on compatibility score
+  //@param {Number} score - compatibility score 0-100
+ 
 const getBadge = (score) => {
   if (score >= 80) return ['Top Match'];
   if (score >= 60) return ['Good Match'];
@@ -63,3 +55,6 @@ module.exports = {
   generateConflictForecast,
   getBadge,
 };
+
+
+//node-express-boilerplate(https://github.com/hagopj13/node-express-boilerplate.git)
