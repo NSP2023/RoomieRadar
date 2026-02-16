@@ -22,7 +22,8 @@ const calculateCompatibility = (userAnswers, otherAnswers) => {
   if (userAnswers.social === otherAnswers.social) score += 1;
 
   return (score / totalCategories) * 100; // convert to 0-100 scale
-};
+};                                                      //DatingApp-Client(https://github.com/charlee-dev/DatingApp-Client.git)
+
 
 //Helper function to generate a simple conflict forecast
  
@@ -59,6 +60,8 @@ const calculateCompatibilityController = async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
+
+   
     // Fetch all other users to compare
     const otherUsers = await User.find({ _id: { $ne: userId } });
 
@@ -74,7 +77,7 @@ const calculateCompatibilityController = async (req, res) => {
       };
     });
 
-    // Save matches in RoommateMatch collection
+    // Save matches in RoommateMatch collection                       //  node-express-boilerplate(https://github.com/hagopj13/node-express-boilerplate.git)
     let roommateMatch = await RoommateMatch.findOne({ user: userId });
     if (!roommateMatch) {
       roommateMatch = new RoommateMatch({ user: userId, matches });
