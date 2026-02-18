@@ -3,16 +3,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx"; // Optional, for conditional classNames
 
-/**
- * Reusable Button Component
- *
- * Props:
- * - text: string, text to display on button
- * - onClick: function, callback for click event
- * - type: string, 'primary' | 'secondary'
- * - disabled: boolean, disable button
- * - className: string, additional custom classes
- */
+ //Reusable Button Component
+
+
+
 const Button = ({ text, onClick, type = "primary", disabled = false, className }) => {
   // Base styles
   const baseStyles =
