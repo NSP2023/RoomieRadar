@@ -50,7 +50,7 @@ const ChartWrapper = ({
   height,
   width,
 }) => {
-  // Default options — especially useful for radar charts
+  // Default options —for radar charts
   const defaultOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -99,7 +99,7 @@ const ChartWrapper = ({
     className,
   };
 
-  // Add height/width if provided (useful when not using responsive layout)
+  // Add height/width 
   if (height) chartProps.height = height;
   if (width) chartProps.width = width;
 
