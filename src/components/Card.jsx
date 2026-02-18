@@ -3,15 +3,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
-/**
- * Reusable Card Component
- *
- * Props:
- * - title: string, card title
- * - children: node, content inside the card
- * - className: string, additional custom classes
- * - highlight: boolean, adds special styling for top matches
- */
+//Reusable Card Component
+
+
 const Card = ({ title, children, className, highlight = false }) => {
   const baseStyles =
     "p-4 rounded-xl shadow-md transition-all duration-200 ease-in-out hover:shadow-lg bg-white";
