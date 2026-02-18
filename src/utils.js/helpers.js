@@ -1,14 +1,12 @@
 // src/utils/helpers.js
 
-/**
- * Calculate compatibility score between two users based on lifestyle answers
- * This is a simplified frontend version — for production accuracy,
- * you should use the backend-computed score from /matches/top or /matches/compare
- *
- * @param {Object} userA - User's lifestyle answers (e.g. from profile)
- * @param {Object} userB - Roommate's lifestyle answers
- * @returns {number} Compatibility score between 0–100
- */
+
+  //Calculate compatibility score between two users based on lifestyle answers
+ 
+ //@param {Object} userA - User's lifestyle answers (e.g. from profile)
+ // @param {Object} userB - Roommate's lifestyle answers
+ // @returns {number} Compatibility score between 0–100
+ 
 export const calculateCompatibility = (userA, userB) => {
   if (!userA || !userB) return 0;
 
@@ -52,21 +50,21 @@ export const calculateCompatibility = (userA, userB) => {
   return Math.round((score / totalFactors) * 100);
 };
 
-/**
- * Format a number as percentage string (e.g. 92 → "92%")
- * @param {number} score
- * @returns {string}
- */
+//Format a number as percentage string (e.g. 92 → "92%")
+ // @param {number} score
+ //@returns {string}
+ 
 export const formatPercentage = (score) => {
   if (typeof score !== 'number' || isNaN(score)) return '—';
   return `${Math.round(score)}%`;
 };
 
-/**
- * Capitalize first letter of each word in a string
- * @param {string} str
- * @returns {string}
- */
+
+ //Capitalize first letter of each word in a string
+ // @param {string} str
+ // @returns {string}
+ 
+
 export const capitalizeWords = (str) => {
   if (!str) return '';
   return str
@@ -76,12 +74,11 @@ export const capitalizeWords = (str) => {
     .join(' ');
 };
 
-/**
- * Format lifestyle value for display (backend enum → nice text)
- * @param {string} category - e.g. 'cleanliness', 'sleep', 'pets'
- * @param {string} value - backend enum value
- * @returns {string} human-readable text
- */
+ // Format lifestyle value for display (backend enum → nice text)
+ // @param {string} category - e.g. 'cleanliness', 'sleep', 'pets'
+ // @param {string} value - backend enum value
+ // @returns {string} human-readable text
+ 
 export const formatLifestyle = (category, value) => {
   if (!value) return 'Not specified';
 
@@ -118,11 +115,7 @@ export const formatLifestyle = (category, value) => {
   return mappings[category]?.[value] || value;
 };
 
-/**
- * Get conflict level label & color class
- * @param {string} level - 'Low', 'Medium', 'High'
- * @returns {{ label: string, className: string }}
- */
+
 export const getConflictStyle = (level) => {
   if (!level) return { label: 'Unknown', className: 'conflict-unknown' };
 
@@ -135,28 +128,20 @@ export const getConflictStyle = (level) => {
   return styles[level] || { label: level, className: 'conflict-unknown' };
 };
 
-/**
- * Simple delay helper (useful for animations / debounce)
- * @param {number} ms
- * @returns {Promise<void>}
- */
+//Simple delay helper (useful for animations / debounce)
+ 
+
 export const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-/**
- * Generate a random pastel color for avatars / backgrounds
- * @returns {string} hex color
- */
+
+
 export const getRandomPastelColor = () => {
   const hue = Math.floor(Math.random() * 360);
   return `hsl(${hue}, 70%, 85%)`;
 };
 
-/**
- * Truncate text with ellipsis
- * @param {string} text
- * @param {number} maxLength
- * @returns {string}
- */
+
+
 export const truncate = (text, maxLength = 120) => {
   if (!text) return '';
   if (text.length <= maxLength) return text;
