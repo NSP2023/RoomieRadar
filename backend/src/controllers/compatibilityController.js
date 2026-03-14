@@ -3,10 +3,9 @@
 const User = require('../models/User');
 const RoommateMatch = require('../models/RoommateMatch');
 
-/**
- * Helper function to calculate compatibility score between two users
- * Returns a number from 0 to 100
- */
+ //Helper function to calculate compatibility score between two users
+ //Returns a number from 0 to 100
+
 const calculateCompatibility = (userAnswers, otherAnswers) => {
   let score = 0;
   const totalCategories = 5; // sleep, cleanliness, noiseTolerance,temperature,social
@@ -23,11 +22,11 @@ const calculateCompatibility = (userAnswers, otherAnswers) => {
   if (userAnswers.social === otherAnswers.social) score += 1;
 
   return (score / totalCategories) * 100; // convert to 0-100 scale
-};
+};                                                      //DatingApp-Client(https://github.com/charlee-dev/DatingApp-Client.git)
 
-/**
- * Helper function to generate a simple conflict forecast
- */
+
+//Helper function to generate a simple conflict forecast
+ 
 const generateConflictForecast = (userAnswers, otherAnswers) => {
   const forecast = {};
   const categories = ['sleep', 'cleanliness', 'noiseTolerance','temperature','social'];
@@ -48,11 +47,8 @@ const generateConflictForecast = (userAnswers, otherAnswers) => {
   return forecast;
 };
 
-/**
- * POST /api/compatibility/calculate
- * Body: { userId }
- * Calculates compatibility scores with all other users
- */
+//Calculates compatibility scores with all other users
+ 
 const calculateCompatibilityController = async (req, res) => {
   try {
     const { userId } = req.body;
@@ -64,6 +60,8 @@ const calculateCompatibilityController = async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
+
+   
     // Fetch all other users to compare
     const otherUsers = await User.find({ _id: { $ne: userId } });
 
@@ -79,7 +77,7 @@ const calculateCompatibilityController = async (req, res) => {
       };
     });
 
-    // Save matches in RoommateMatch collection
+    // Save matches in RoommateMatch collection                       //  node-express-boilerplate(https://github.com/hagopj13/node-express-boilerplate.git)
     let roommateMatch = await RoommateMatch.findOne({ user: userId });
     if (!roommateMatch) {
       roommateMatch = new RoommateMatch({ user: userId, matches });
@@ -99,10 +97,8 @@ const calculateCompatibilityController = async (req, res) => {
   }
 };
 
-/**
- * GET /api/compatibility/:userId
- * Returns saved compatibility matches for a user
- */
+//Returns saved compatibility matches for a user
+
 const getCompatibilityController = async (req, res) => {
   try {
     const { userId } = req.params;

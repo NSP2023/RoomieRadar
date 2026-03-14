@@ -1,0 +1,224 @@
+/* src/pages/Auth/Auth.css */
+
+/* Full page background & centering */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff5f7 0%, #f0f8ff 100%);
+  padding: 2rem 1rem;
+}
+
+/* Main card / container */
+.auth-container {
+  background: white;
+  border-radius: var(--border-radius, 16px);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.08));
+  border: 1px solid #ffe4e1;
+}
+
+/* Header text */
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+  font-size: 2.4rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.auth-header p {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Error message */
+.auth-error {
+  background: rgba(231, 76, 60, 0.12);
+  color: #e74c3c;
+  padding: 0.9rem 1.2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Form layout */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Input group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #444;
+  font-size: 0.98rem;
+}
+
+.form-group input {
+  padding: 0.9rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.15);
+  background: white;
+}
+
+/* Submit button */
+.auth-btn {
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.auth-btn.primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.auth-btn.primary:hover:not(:disabled) {
+  background: #e65b50;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 111, 97, 0.3);
+}
+
+.auth-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Footer / links */
+.auth-footer {
+  text-align: center;
+  margin-top: 1.8rem;
+  font-size: 0.98rem;
+  color: #666;
+}
+
+.auth-footer p {
+  margin: 0.5rem 0;
+}
+
+.auth-link {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-link.secondary {
+  color: #777;
+  font-weight: 500;
+}
+
+/* Optional loading spinner inside button */
+.auth-btn.loading {
+  position: relative;
+  color: transparent;
+}
+
+.auth-btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+/* ────────────────────────────────────────────────
+   Password visibility toggle
+   ──────────────────────────────────────────────── */
+.password-group {
+  position: relative;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #777;
+  padding: 0;
+}
+
+.toggle-password:hover {
+  color: var(--primary-color);
+}
+
+/* Forgot password link */
+.forgot-link {
+  text-align: center;
+  margin-top: 0.8rem;
+}
+
+.text-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+}
+
+/* Forgot password message */
+.forgot-message {
+  background: rgba(52, 209, 151, 0.15);
+  color: #2e8b57;
+  padding: 0.9rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  text-align: center;
+}

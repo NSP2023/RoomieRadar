@@ -1,0 +1,271 @@
+/* src/components/Navbar.css */
+
+/* === Root variables (used throughout navbar) === */
+:root {
+  --coral: #ff7b8c;
+  --light-coral: #ffa1b5;
+  --soft-pink: #ffe4ec;
+  --light-pink: #fff0f5;
+  --light-orange: #ffdab9;
+  --cream: #fffaf0;
+  --white: #ffffff;
+  --text: #5c4b51;
+  --text-light: #8a7580;
+  --shadow: 0 8px 24px rgba(255, 123, 140, 0.22);
+  --radius: 999px;
+}
+
+/* === Main navbar container === */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 240, 245, 0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 2px solid rgba(255, 180, 193, 0.45);
+  padding: 1.1rem 0;
+  box-shadow: var(--shadow);
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+/* Navbar inner wrapper */
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === Brand / Logo === */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--coral);
+  transition: all 0.4s ease;
+  margin-left: 0;
+  padding-left: 1rem;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.06) rotate(2deg);
+  color: var(--light-coral);
+}
+
+.brand-icon {
+  font-size: 2.2rem;
+  transition: transform 0.35s ease;
+}
+
+.navbar-brand:hover .brand-icon {
+  transform: rotate(15deg) scale(1.15);
+}
+
+.brand-text {
+  letter-spacing: -0.6px;
+}
+
+.brand-heart {
+  font-size: 1.5rem;
+  margin-left: 0.25rem;
+  color: var(--light-coral);
+  transition: transform 0.4s ease;
+}
+
+.navbar-brand:hover .brand-heart {
+  transform: scale(1.4) rotate(20deg);
+}
+
+/* === Desktop Links === */
+.desktop-links {
+  display: flex;
+  gap: 2.4rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.12rem;
+  text-decoration: none;
+  padding: 0.75rem 1.3rem;
+  border-radius: 18px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link:hover {
+  color: white;
+  background: linear-gradient(135deg, var(--coral), var(--light-orange));
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 12px 28px rgba(255, 123, 140, 0.45);
+}
+
+.nav-link:hover::after {
+  content: "✧";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  opacity: 0;
+  transition: all 0.35s ease;
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+  right: 18px;
+}
+
+.nav-link.active {
+  color: white;
+  background: linear-gradient(90deg, var(--coral), var(--light-orange));
+  box-shadow: 0 8px 22px rgba(255, 123, 140, 0.48);
+  transform: scale(1.05);
+}
+
+/* === Hamburger Button (Mobile) === */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 36px;
+  height: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+  padding: 0;
+  transition: transform 0.3s ease;
+}
+
+.hamburger:hover {
+  transform: scale(1.15);
+}
+
+.hamburger span {
+  width: 100%;
+  height: 4.5px;
+  background: var(--coral);
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(9px, 9px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.3);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* === Mobile Menu === */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 82%;
+  max-width: 360px;
+  height: 100vh;
+  background: white;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.16);
+  transition: right 0.45s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 999;
+  padding: 5.5rem 2.2rem 2.2rem;
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+.mobile-close-btn {
+  position: absolute;
+  top: 1.8rem;
+  right: 1.8rem;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  color: var(--light-coral);
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.mobile-close-btn:hover {
+  color: var(--coral);
+  transform: rotate(180deg) scale(1.2);
+}
+
+/* Mobile links */
+.mobile-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.mobile-link {
+  color: var(--text);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 1.1rem 1.5rem;
+  border-radius: 18px;
+  transition: all 0.32s ease;
+  display: block;
+}
+
+.bouncy:hover {
+  transform: translateY(-6px) scale(1.06);
+  background: var(--soft-pink);
+  color: var(--coral);
+  box-shadow: 0 12px 30px rgba(255, 180, 193, 0.45);
+}
+
+.mobile-link.active,
+.mobile-link.active:hover {
+  background: linear-gradient(90deg, var(--coral), var(--light-orange));
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 10px 28px rgba(255, 123, 140, 0.42);
+}
+
+/* Responsive breakpoints */
+@media (max-width: 980px) {
+  .desktop-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 1rem 0;
+  }
+
+  .navbar-brand {
+    width: 100%;
+    justify-content: center;
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
+
+  .brand-icon {
+    font-size: 2rem;
+  }
+}

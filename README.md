@@ -1,68 +1,74 @@
-# RoomieRadar
-Roommate Compatibility Checker
+<img width="1897" height="871" alt="image" src="https://github.com/user-attachments/assets/9f4292f5-49c4-438b-8822-47e27756844c" />
 
-Find your perfect roommate match with RoomieRadar – a warm, friendly, and interactive web application that helps you check compatibility with potential roommates based on lifestyle habits.
+**Roommate Compatibility Checker**
 
-🏠 Overview
+RoomieRadar is a full-stack MERN web application that helps users find compatible roommates based on lifestyle preferences such as sleep habits, noise tolerance, and cleanliness. The platform provides compatibility scores, conflict predictions, and practical insights to support better shared-living decisions.
 
-RoomieRadar is a full-stack MERN web application that allows users to:
+---
 
-Answer lifestyle questions about sleep, noise tolerance, and cleanliness
+## 🚀 Features
 
-Get a compatibility score with potential roommates
+### Core Functionality
 
-See visual conflict forecasts and a one-day simulation of shared living
+<img width="1897" height="868" alt="cute" src="https://github.com/user-attachments/assets/bf5f701d-7658-450c-96ff-aa96601b0eb8" />
 
-Explore a Roommate Match section with detailed insights and top matches
+* Multi-step lifestyle questionnaire
+* Weighted compatibility scoring algorithm
+* Results dashboard with radar charts and personality labels
+* Conflict forecast highlighting potential friction areas
+* One-day shared living simulation
 
-Receive practical tips to improve compatibility
+### Roommate Match System
+<img width="1905" height="870" alt="image" src="https://github.com/user-attachments/assets/9f8b8b6a-b005-4de2-9e50-117bf69673c2" />
 
-The design emphasizes a warm and welcoming interface, making the experience feel like a digital hug.
 
-🎯 Features
-Core Features
+* List of potential roommates with compatibility scores
+* Highlighted top matches with badges
+* Clickable profile cards with detailed daily simulations
+* Optional side-by-side roommate comparison
+<img width="1885" height="856" alt="image" src="https://github.com/user-attachments/assets/087b5858-91e8-44b4-8b5a-d4882510bbfc" />
 
-Multi-step lifestyle questionnaire
 
-Weighted compatibility scoring system
+### UI & Interaction
 
-Results dashboard with radar charts and personality labels
+* “What-If” preference slider for dynamic result updates
+* Warm, minimal UI with rounded cards and soft shadows
+* Fully responsive design for mobile and desktop
 
-Conflict forecast highlighting potential friction
+---
 
-One-day roommate simulation timeline
+## 🛠 Tech Stack
 
-Roommate Match Section
+**Frontend**
 
-Lists potential roommates with compatibility scores
+* React.js
+* HTML5, CSS3
+* Chart.js
 
-Highlights top matches with badges
+**Backend**
 
-Clickable cards to see detailed one-day simulations
+* Node.js
+* Express.js
 
-Optional: compare two roommates side by side
+**Database**
 
-Interactive Enhancements
+* MongoDB (Mongoose)
 
-“What-If” slider for adjusting preferences and seeing updated results
+**State Management**
 
-Warm, cozy color theme with rounded cards and soft shadows
+* React Hooks / Context API
 
-Mobile responsive design
+**Deployment (Optional)**
 
-🛠️ Technology Stack
+* Vercel
+* Render
+* Heroku
 
-Frontend: React.js, HTML, CSS, Chart.js
+---
 
-Backend: Node.js, Express.js
+## 📁 Project Structure
 
-Database: MongoDB (Mongoose)
-
-State Management: React Hooks / Context API
-
-Deployment: Vercel / Render / Heroku (optional)
-
-📁 File Structure
+```
 roomie-radar/
 ├── frontend/
 │   ├── public/
@@ -88,56 +94,65 @@ roomie-radar/
 │   │   └── server.js
 ├── README.md
 └── .gitignore
+```
 
-⚡ Setup & Installation
-Backend
+---
+
+## ⚙️ Installation & Setup
+
+### Backend
+
+```bash
 cd backend
 npm install
-npm run dev   # Starts backend server on http://localhost:5000
+npm run dev
+```
 
-Frontend
+Runs on: `http://localhost:5000`
+
+### Frontend
+
+```bash
 cd frontend
 npm install
-npm run dev   # Starts frontend server on http://localhost:3000
+npm run dev
+```
 
+Runs on: `http://localhost:3000`
 
-Make sure MongoDB is running locally or provide a connection string in .env
+> Ensure MongoDB is running locally or use a cloud MongoDB URI.
 
-🔧 Environment Variables
+---
 
-Create a .env file in /backend:
+## 🔐 Environment Variables
 
+Create a `.env` file inside `/backend`:
+
+```
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
+```
 
-🖼️ Screenshots (Optional)
+## 📌 Future Improvements
 
-Landing Page – Cozy, welcoming hero section
+* Export compatibility reports (PDF / JSON)
+* Dark / light mode toggle
+* Save multiple roommate profiles
+* Smooth animations for charts and match highlights
 
-Questionnaire Page – Multi-step questions with progress bar
+---
 
-Results Dashboard – Radar chart + compatibility score + tips
+## 👩‍💻 Contributors
 
-Roommate Match Section – Highlighted top matches
-
-(Add screenshots after building the UI)
-
-📈 Future Enhancements
-
-Export compatibility reports (PDF/JSON)
-
-Dark/light mode toggle
-
-Save multiple profiles for later comparison
-
-Smooth animations for radar charts and match highlights
-
-👩‍💻 Authors
-
-Noshin Syara, Tasnia Rahman Maha, Maliha Mehnaj
+* **Noshin Syara**
+* **Tasnia Rahman Maha**
+* **Maliha Mehnaj**
 
 Islamic University of Technology (IUT)
 
-📄 License
+---
 
-MIT License
+## 📄 License
+
+This project is licensed under the **MIT License**.
+

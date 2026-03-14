@@ -1,0 +1,228 @@
+.profile-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff0f5, #ffe5d9);
+  padding: 2rem 1rem 4rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 3rem;
+  color: #ff7b8c;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  text-shadow: 3px 3px 0 #ffcc99;
+}
+
+.subtitle {
+  text-align: center;
+  color: #a66f5c;
+  font-size: 1.3rem;
+  margin-bottom: 2.5rem;
+}
+
+.profile-card {
+  background: rgba(255, 245, 240, 0.94);
+  border-radius: 28px;
+  padding: 2.5rem;
+  border: 3px solid #ffb3c1;
+  box-shadow: 0 12px 35px rgba(166, 111, 92, 0.22);
+}
+
+.avatar-section {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 6px solid white;
+  box-shadow: 0 10px 30px rgba(255, 123, 140, 0.4);
+}
+
+.change-avatar-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #ff7b8c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+
+.change-avatar-btn:hover {
+  transform: scale(1.1);
+}
+
+.profile-name {
+  font-size: 2.6rem;
+  color: #ff7b8c;
+  margin: 1rem 0 0.5rem;
+  font-family: 'Comic Neue', cursive;
+}
+
+.profile-meta {
+  color: #8a7580;
+  font-size: 1.1rem;
+}
+
+.bio-section,
+.personal-details,
+.preferences-section {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  color: #a66f5c;
+  margin-bottom: 1.2rem;
+  border-bottom: 2px dashed #ffb3c1;
+  padding-bottom: 0.6rem;
+  display: inline-block;
+}
+
+.bio-text {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  color: #5c4b51;
+}
+
+.info-grid,
+.preferences-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.info-item,
+.preference-item {
+  background: rgba(255, 240, 235, 0.8);
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 2px solid #ffe4ec;
+}
+
+.info-label,
+.pref-label {
+  font-weight: 600;
+  color: #a66f5c;
+  margin-bottom: 0.5rem;
+}
+
+.info-value,
+.pref-score {
+  font-size: 1.3rem;
+  color: #ff7b8c;
+  font-weight: 700;
+}
+
+.pref-select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 12px;
+  border: 2px solid #ffb3c1;
+  font-size: 1.1rem;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 2px dashed #ffb3c1;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  color: #ff7b8c;
+}
+
+.bio-textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px dashed #ffb3c1;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.action-buttons {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.edit-btn,
+.save-btn,
+.cancel-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  margin: 0 0.8rem;
+  transition: all 0.3s;
+}
+
+.edit-btn {
+  background: linear-gradient(90deg, #ff7b8c, #ffb3c1);
+  color: white;
+  box-shadow: 0 8px 20px rgba(255, 123, 140, 0.4);
+}
+
+.edit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 123, 140, 0.55);
+}
+
+.save-btn {
+  background: linear-gradient(90deg, #4CAF50, #81C784);
+  color: white;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+.save-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(76, 175, 80, 0.55);
+}
+
+.cancel-btn {
+  background: #ffe5d9;
+  color: #a66f5c;
+  box-shadow: 0 4px 12px rgba(166, 111, 92, 0.2);
+}
+
+.cancel-btn:hover {
+  background: #ffcc99;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-name {
+    font-size: 2.1rem;
+  }
+
+  .avatar-img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .preferences-grid {
+    grid-template-columns: 1fr;
+  }
+}

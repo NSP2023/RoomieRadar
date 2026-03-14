@@ -1,0 +1,212 @@
+/* DaySimulation.css */
+
+.simulation-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe5d9 100%);
+  padding: 2rem 1rem 4rem;
+  font-family: 'Nunito', system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding: 0.7rem 1.6rem;
+  background: #ffb3c1;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  background: #ff7b8c;
+  transform: translateY(-2px);
+}
+
+.page-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 2.8rem;
+  color: #ff7b8c;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  text-shadow: 3px 3px 0 #ffcc99;
+}
+
+.subtitle {
+  text-align: center;
+  color: #a66f5c;
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.avatar-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.simulation-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 6px solid white;
+  box-shadow: 0 10px 30px rgba(255, 123, 140, 0.35);
+  margin-bottom: 1rem;
+}
+
+.roomie-name {
+  font-size: 2.1rem;
+  color: #a66f5c;
+  margin: 0;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: linear-gradient(to bottom, #ffb3c1, #ff7b8c);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+  border-radius: 2px;
+}
+
+.timeline-item {
+  padding: 1.5rem 0;
+  position: relative;
+  width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+  padding-right: 2.5rem;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+  padding-left: 2.5rem;
+}
+
+.time-bubble {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 100px;
+  background: white;
+  border: 4px solid #ffb3c1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #ff7b8c;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+.timeline-item:nth-child(odd) .time-bubble {
+  right: -50px;
+}
+
+.timeline-item:nth-child(even) .time-bubble {
+  left: -50px;
+}
+
+.activity-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.4rem;
+  box-shadow: 0 8px 25px rgba(166,111,92,0.18);
+  border: 2px solid #ffe4ec;
+  position: relative;
+}
+
+.activity-emoji {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.activity-description {
+  color: #5c4b51;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.compat-note {
+  background: #fff0f5;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: #a66f5c;
+}
+
+.note-label {
+  font-weight: 600;
+  color: #ff7b8c;
+}
+
+/* Summary box */
+.summary-box {
+  margin-top: 3rem;
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(255,123,140,0.22);
+  border: 3px dashed #ffb3c1;
+  text-align: center;
+}
+
+.summary-box h3 {
+  color: #ff7b8c;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+
+.tip {
+  background: #fff5f0;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1.2rem;
+  font-style: italic;
+  color: #a66f5c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 40px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 80px;
+    text-align: left;
+  }
+
+  .time-bubble {
+    left: 0 !important;
+  }
+
+  .activity-card {
+    margin-left: 0;
+  }
+}

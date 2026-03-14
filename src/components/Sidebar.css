@@ -1,0 +1,123 @@
+/* =========================
+   Sidebar Main Styles
+   ========================= */
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff5f0 0%, #ffe5d9 100%);
+  border-right: 2px solid #ffb3c1;
+  box-shadow: 4px 0 15px rgba(166, 111, 92, 0.12);
+  transition: transform 0.35s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  padding-top: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar collapsed (hidden) */
+.sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+/* Sidebar expanded (visible) */
+.sidebar.expanded {
+  transform: translateX(0);
+}
+
+/* =========================
+   Sidebar Header
+   ========================= */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px dashed #ffb3c1;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 2.1rem;
+  color: #ff7b8c;
+  margin: 0;
+  white-space: nowrap;
+  text-shadow: 2px 2px 0 #ffcc99;
+}
+
+/* =========================
+   Links
+   ========================= */
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0 0.8rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 1.2rem;
+  color: #a66f5c;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 179, 193, 0.25);
+  color: #ff7b8c;
+}
+
+.active-sidebar-link {
+  background: linear-gradient(90deg, #ff7b8c, #ffcc99);
+  color: white;
+  font-weight: 700;
+}
+
+/* =========================
+   Pull Tab Arrow
+   ========================= */
+.toggle-btn.pull-tab {
+  position: fixed;
+  top: 20px;
+  left: 0;       /* stick to the left edge */
+  z-index: 1001; /* above sidebar */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ffb3c1;
+  background: #fff;
+  color: #a66f5c;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.toggle-btn.pull-tab:hover {
+  background: #ffcc99;
+  transform: scale(1.1);
+}
+
+/* =========================
+   Mobile Adjustments
+   ========================= */
+@media (max-width: 768px) {
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.expanded {
+    transform: translateX(0);
+  }
+}
