@@ -152,7 +152,7 @@ router.get(
     try{
         const userId=req.user._id;
         const roommateMatch = await RoommateMatch.findOne({ user: userId })
-        .populate('matches.roommate', 'lifestyle preferences').lean;
+        .populate('matches.roommate', 'lifestyle preferences').lean();
         let bestMatch = null;
         if(roommateMatch && roommateMatch.matches.length>0){
             const sortedMatches = roommateMatch.matches.sort((a,b)=>(b.compatibilityScore||0) - (a.compatibilityScore||0));
@@ -248,7 +248,7 @@ router.put(
                   const compatibilityScore = calculateCompatibility(user.lifestyle, other.lifestyle);
                   const conflictForecast = generateConflictForecast(user.lifestyle, other.lifestyle);
                   const simulation = generateSimulation(user.lifestyle, other.lifestyle);
-                  const badges = getBadges(compatibilityScore);
+                  const badges = getBadge(compatibilityScore);
 
                   return {
                     roommate: other._id,
