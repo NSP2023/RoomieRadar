@@ -20,12 +20,21 @@ const app = express();
 // Middleware
 
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:5173', // ← update cors
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(morgan('dev')); // logs requests to console
 
-
+app.use(session({
+  secret: process.env.JWT_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 
@@ -72,7 +81,7 @@ app.use((err, req, res, next) => {
 // Start Server
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(` Mock server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Mock server running on port ${PORT}`));
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log(" MongoDB connected"))
-  .catch(err => console.error(" MongoDB connection failed:", err.message));
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error("MongoDB connection failed:", err.message));
