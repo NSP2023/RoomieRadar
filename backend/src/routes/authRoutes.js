@@ -328,8 +328,6 @@ router.get(
           message: "User not found" 
         });
       }
-
-      // Return public profile (don't send email/password)
       res.status(200).json({
         success: true,
         _id: user._id,
@@ -353,4 +351,21 @@ router.get(
   }
 );
 
+router.get(
+  'auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] ,session: false})
+)
+
+router.get(
+  'auth/google/callback',
+  passport.authenticate('google', {
+    session: false,
+    failureRedirect:`${process.env.CLIENT_URL}/login?error=only_iut_emails`,
+  }),
+  (req, res) => {
+    const payload={id: req.user._id, email: req.user.email }
+    const token=jwt.sign(payload, process.env.JWT_SECRET,{expiresIn:'7d'})
+    res.redirect(`${process.env.CLIENT_URL}/auth/callback?token=${token}`)
+  }
+)
 module.exports = router;

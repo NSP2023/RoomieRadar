@@ -12,7 +12,8 @@ const UserSchema = new mongoose.Schema(
       maxlength: [50, 'Name cannot exceed 50 characters'],
     },
     email: { type: String, required: [true, 'Email is required'], unique: true },
-    password: { type: String, required: true, minlength: 6 },
+    password: { type: String, minlength: 6 }, 
+    googleId: { type: String, unique: true, sparse: true },
 
     // Profile info 
     age: { type: Number ,min: [17, 'You must be at least 17 years old'],},
