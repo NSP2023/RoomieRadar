@@ -4,22 +4,27 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const User = require("../models/User");
 const RoommateMatch = require("../models/RoommateMatch");
-const {calculateCompatibility,generateConflictForecast,getBadge} = require("../services/CompatibilityService");
-const {generateSimulation} = require("../services/SimulationService");
+const {calculateCompatibility,generateConflictForecast,getBadge} = require("../services/compatibilityService");
+const {generateSimulation} = require("../services/simulationService");
 const router = express.Router();
 
 /* REGISTER */
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, age, university, department, year, hall, whatsapp } = req.body;
+    const { name, email, password, age, university, department, year, hall, whatsapp, studentId } = req.body;
 
-    // Validation
-    if (!name || !email || !password) {
-      return res.status(400).json({ 
-        success: false,
-        message: "Name, email, and password are required" 
-      });
-    }
+if (!name || !email || !password) {
+  return res.status(400).json({ success: false, message: 'Name, email, and password are required' });
+}
+
+// Enforce IUT email format
+if (!/^[a-zA-Z0-9._%+-]+@iut-dhaka\.edu$/.test(email)) {
+  return res.status(400).json({ success: false, message: 'Only IUT email addresses are allowed (@iut-dhaka.edu)' });
+}
+
+if (!studentId) {
+  return res.status(400).json({ success: false, message: 'Student ID is required' });
+}
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -34,16 +39,10 @@ router.post("/register", async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10);
 
     // Create user
-    const user = await User.create({
-      name,
-      email,
-      password: hashPassword,
-      age,
-      university,
-      department,
-      year,
-      hall,
-    });
+   const user = await User.create({
+  name, email, password: hashPassword,
+  age, university, department, year, hall, studentId,
+});
 
     // Generate token
     const payload = { id: user._id, email: user.email };
@@ -58,6 +57,7 @@ router.post("/register", async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        studentId: user.studentId,
         age: user.age,
         university: user.university,
         department: user.department,
