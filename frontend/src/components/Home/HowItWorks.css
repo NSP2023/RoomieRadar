@@ -303,3 +303,14 @@
     padding: 1.2rem 1.4rem;
   }
 }
+/* Lightweight scroll-reveal — replaces framer-motion */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
