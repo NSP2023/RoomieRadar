@@ -1,8 +1,6 @@
 // src/components/Home/HowItWorks.jsx
-
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ClipboardCheck, TrendingUp, Users, Heart } from "lucide-react";
 import "./HowItWorks.css";
 
@@ -13,49 +11,62 @@ const faqData = [
       "Yes! The basic questionnaire, compatibility check and seeing matches is completely free. Premium features might come later, but the heart of RoomieRadar will always stay free~",
   },
   {
-    question: "How accurate is the compatibility score?",
+    question: "How accuracy is the compatibility score?",
     answer:
-      "It's based on things students & young adults care about most! The more honest your answers, the more magical and accurate the match will be !",
+      "It's based on things students & young adults care about most! The more honest your answers, the more magical and accurate the match will be!",
   },
   {
     question: "Can I find roommates in my university?",
     answer:
-      "Right now we show everyone, but very soon we'll add city & university filters so you can find your perfect roomie nearby!",
+      "This is only and strictly inside IUT residential halls — we will include non-res in the future inshallah!",
   },
 ];
+
+// Lightweight intersection-observer hook — triggers once when element enters view
+const useInView = (threshold = 0.15) => {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { threshold }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return [ref, visible];
+};
 
 const HowItWorks = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(null);
 
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
-  const handleGetStarted = () => {
-    navigate("/questionnaire");
-  };
+  const [titleRef,  titleVisible]  = useInView();
+  const [stepsRef,  stepsVisible]  = useInView();
+  const [ctaRef,    ctaVisible]    = useInView();
+  const [faqRef,    faqVisible]    = useInView();
 
   const steps = [
     {
       icon: ClipboardCheck,
       title: "1. Answer Questions",
-      description:
-        "Tell us about your lifestyle — sleep, cleanliness, noise, guests, and more.",
+      description: "Tell us about your lifestyle: sleep, cleanliness, noise, guests, and more.",
       color: "#ff7b8c",
     },
     {
       icon: TrendingUp,
       title: "2. Get Your Score",
-      description:
-        "Our smart algorithm calculates real compatibility using weighted scoring.",
+      description: "Our smart algorithm calculates real compatibility using weighted scoring.",
       color: "#ff9aa8",
     },
     {
       icon: Users,
       title: "3. Review Insights",
-      description:
-        "See detailed radar charts, conflict forecast, and personalized tips.",
+      description: "See detailed radar charts, conflict forecast, and personalized tips.",
       color: "#ffb3c1",
     },
   ];
@@ -65,79 +76,63 @@ const HowItWorks = () => {
       <div className="container">
 
         {/* Title */}
-        <motion.div
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+        <div
+          ref={titleRef}
+          className={`section-title fade-up ${titleVisible ? "visible" : ""}`}
         >
-          <span className="title-icon"></span>
+          <span className="title-icon">🏠</span>
           <h2>How It Works</h2>
           <p className="section-subtitle">
             Finding your perfect roommate is easier than you think ♡
           </p>
-        </motion.div>
+        </div>
 
         {/* Steps */}
-        <div className="steps-grid">
+        <div ref={stepsRef} className="steps-grid">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <motion.div
+              <div
                 key={index}
-                className="step-card"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                whileHover={{ y: -12 }}
+                className={`step-card fade-up ${stepsVisible ? "visible" : ""}`}
+                style={{ transitionDelay: `${index * 120}ms` }}
               >
                 <div
                   className="step-icon-wrapper"
-                  style={{ backgroundColor: `${step.color}15` }}
+                  style={{ backgroundColor: `${step.color}18` }}
                 >
                   <Icon size={42} color={step.color} />
                 </div>
                 <h3 className="step-title">{step.title}</h3>
                 <p className="step-description">{step.description}</p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
         {/* CTA */}
-        <motion.div
-          className="cta-section"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        <div
+          ref={ctaRef}
+          className={`cta-section fade-up ${ctaVisible ? "visible" : ""}`}
         >
           <Heart className="cta-heart" size={48} />
-          <p className="cta-text">
-            Ready to find your perfect roommate match?
-          </p>
-          <button onClick={handleGetStarted} className="btn-primary btn-large">
+          <p className="cta-text">Ready to find your perfect roommate match?</p>
+          <button onClick={() => navigate("/questionnaire")} className="btn-primary btn-large">
             Let's Get Started !!
           </button>
-        </motion.div>
+        </div>
 
         {/* FAQ */}
-        <motion.div
-          className="faq-section"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+        <div
+          ref={faqRef}
+          className={`faq-section fade-up ${faqVisible ? "visible" : ""}`}
         >
-          <h2 className="faq-heading">Frequently Asked Questions ✿</h2>
-
+          <h2 className="faq-heading">Frequently Asked Questions</h2>
           {faqData.map((item, index) => (
             <div key={index} className="faq-item">
               <button
                 className={`faq-question ${openFaq === index ? "active" : ""}`}
-                onClick={() => toggleFaq(index)}
+                onClick={() => setOpenFaq(openFaq === index ? null : index)}
               >
                 {item.question}
                 <span className="faq-toggle">{openFaq === index ? "−" : "+"}</span>
@@ -147,7 +142,7 @@ const HowItWorks = () => {
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
 
       </div>
     </section>
