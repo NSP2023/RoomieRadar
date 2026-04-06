@@ -9,20 +9,6 @@ import cozyImg from "../../assets/image/cozy.png";
 import InstagramIcon from '../../assets/image/instagram.png';
 import EmailIcon from '../../assets/image/email.png';
 
-const faqData = [
-  {
-    question: "Is RoomieRadar free to use?",
-    answer: "Yes! The basic questionnaire, compatibility check and seeing matches is completely free. Premium features might come later, but the heart of RoomieRadar will always stay free~"
-  },
-  {
-    question: "How accurate is the compatibility score?",
-    answer: "It's based on things students & young adults care about most! The more honest your answers, the more magical and accurate the match will be !"
-  },
-  {
-    question: "Can I find roommates in my university?",
-    answer: "Right now we show everyone, but very soon we'll add city & university filters so you can find your perfect roomie nearby!"
-  },
-];
 
 const Landing = () => {
   const [openFaq, setOpenFaq] = useState(null);
@@ -61,7 +47,7 @@ const Landing = () => {
         <p className="tagline">
           Find your perfect roomie with lots of sparkles & cozy vibes<br />
           <br></br>
-          Cute questions → real compatibility + conflict forecast + happy living tips!
+          Cute questions + real compatibility + conflict forecast + happy living tips!
         </p>
 
         <div className="cta-buttons">
@@ -97,7 +83,7 @@ const Landing = () => {
   </div>
 
   <h3>One Day Together</h3>
-  <p>See how a whole day would feel — morning to sleepy time~</p>
+  <p>See how a whole day would feel: morning to sleepy time </p>
 </div>
 
           <div className="feature-card">
@@ -120,14 +106,14 @@ const Landing = () => {
         <h2 className="section-title">How to Be a Super Cute Roomie</h2>
         <div className="tips-grid">
           <div className="tip-card">
-            <p>🧼 Talk before tiny problems become big ones</p>
-            <p>🌙 Respect sleep & quiet time</p>
-            <p>🫧 Always clean up after yourself (especially snacks!)</p>
+            <p>🧼  Talk before tiny problems become big ones</p>
+            <p>🌙  Respect sleep & quiet time</p>
+            <p>🫧  Always clean up after yourself (especially snacks!)</p>
           </div>
           <div className="tip-card">
-            <p>🎀 Tell each other about guests early</p>
-            <p>💬 Be honest about your habits from the start</p>
-            <p>🍬 Little surprises like snacks make hearts happy ! </p>
+            <p>🎀  Tell each other about guests early</p>
+            <p>💬  Be honest about your habits from the start</p>
+            <p>🍬  Little surprises like snacks make hearts happy ! </p>
           </div>
         </div>
       </section>
