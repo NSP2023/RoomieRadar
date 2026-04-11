@@ -13,18 +13,18 @@ router.post("/register", async (req, res) => {
   try {
     const { name, email, password, age, university, department, year, hall, whatsapp, studentId } = req.body;
 
-if (!name || !email || !password) {
-  return res.status(400).json({ success: false, message: 'Name, email, and password are required' });
-}
+  if (!name || !email || !password) {
+    return res.status(400).json({ success: false, message: 'Name, email, and password are required' });
+  }
 
-// Enforce IUT email format
-if (!/^[a-zA-Z0-9._%+-]+@iut-dhaka\.edu$/.test(email)) {
-  return res.status(400).json({ success: false, message: 'Only IUT email addresses are allowed (@iut-dhaka.edu)' });
-}
+  // Enforce IUT email format
+  if (!/^[a-zA-Z0-9._%+-]+@iut-dhaka\.edu$/.test(email)) {
+    return res.status(400).json({ success: false, message: 'Only IUT email addresses are allowed (@iut-dhaka.edu)' });
+  }
 
-if (!studentId) {
-  return res.status(400).json({ success: false, message: 'Student ID is required' });
-}
+  if (!studentId) {
+    return res.status(400).json({ success: false, message: 'Student ID is required' });
+  }
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -40,9 +40,10 @@ if (!studentId) {
 
     // Create user
    const user = await User.create({
-  name, email, password: hashPassword,
-  age, university, department, year, hall, studentId,
-});
+    name, email, password: hashPassword,
+    age: age ? Number(age) : undefined,
+    university, department, year, hall, studentId,
+    });
 
     // Generate token
     const payload = { id: user._id, email: user.email };
@@ -74,7 +75,7 @@ if (!studentId) {
     console.error("Registration error:", error);
     res.status(500).json({ 
       success: false,
-      message: "Server error during registration" 
+      message: error.message || "Server error during registration" 
     });
   }
 });
@@ -352,12 +353,12 @@ router.get(
 );
 
 router.get(
-  'auth/google',
+  '/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] ,session: false})
 )
 
 router.get(
-  'auth/google/callback',
+  '/auth/google/callback',
   passport.authenticate('google', {
     session: false,
     failureRedirect:`${process.env.CLIENT_URL}/login?error=only_iut_emails`,
