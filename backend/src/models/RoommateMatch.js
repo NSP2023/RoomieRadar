@@ -60,4 +60,3 @@ const RoommateMatchSchema = new mongoose.Schema(
 
 module.exports = mongoose.model('RoommateMatch', RoommateMatchSchema);
 
-//proshop_mern-https://github.com/bradtraversy/proshop_mern.git

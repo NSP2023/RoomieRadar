@@ -27,7 +27,8 @@ const UserSchema = new mongoose.Schema(
         return `https://api.dicebear.com/9.x/avataaars/svg?seed=${this._id || this.name || 'user'}&backgroundColor=ffdfbf`;
       },
     },
-    whatsapp: { type: String }, 
+  whatsapp: { type: String },
+studentId: { type: String, unique: true, sparse: true },
     //  Lifestyle 
     lifestyle: {
       cleanliness: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
