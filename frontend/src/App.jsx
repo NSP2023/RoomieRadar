@@ -54,7 +54,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/how-it-works" element={<HowItWorks />} />
-
+              <Route path="/auth/callback" element={<AuthCallback />} />
               {/* Protected routes — require login */}
               <Route
                 path="/dashboard"

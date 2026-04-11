@@ -234,7 +234,7 @@
 .google-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   background: #fff;
   color: #333;
   border: 1px solid #ddd;
@@ -243,6 +243,7 @@
   font-size: 0.95rem;
   transition: background 0.2s ;
   cursor: pointer;
+  gap:8 px;
 }
 
 .google-btn:hover {

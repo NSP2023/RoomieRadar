@@ -188,7 +188,7 @@ const Login = () => {
         <img
           src="https://www.google.com/favicon.ico"
           alt="Google"
-          style={{ width: 18, height: 18, marginRight: 8 }}
+          style={{ width: 18, height: 18 }}
         />
           Continue with Google
         </a>
