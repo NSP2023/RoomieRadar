@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { useSearchParams } from 'react-router-dom';
 import './Auth.css';
 
 const Login = () => {
@@ -17,7 +18,8 @@ const Login = () => {
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotMessage, setForgotMessage] = useState('');
   const [showForgotForm, setShowForgotForm] = useState(false);
-
+  const [searchParams]=useSearchParams();
+  const oauthError=searchParams.get('error');
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -51,8 +53,6 @@ const Login = () => {
     }
 
     try {
-      // This endpoint should be implemented on backend
-      // For now we simulate success
       // await axios.post(`${API_BASE_URL}/users/forgot-password`, { email: forgotEmail });
 
       setForgotMessage(
@@ -79,7 +79,11 @@ const Login = () => {
         </div>
 
         {displayError && <div className="auth-error">{displayError}</div>}
-
+        {oauthError === 'only_iut_emails' && (
+          <div className="auth-error">
+            Only @iut-dhaka.edu emails are allowed.
+          </div>
+        )}
         {!showForgotForm ? (
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">
@@ -175,7 +179,17 @@ const Login = () => {
             </div>
           </form>
         )}
-
+        <div className="auth-divider">
+          <span>or</span>
+        </div>
+        <a href="http://localhost:5000/api/users/auth/google" className="auth-btn google-btn">
+        <img
+          src="https://www.google.com/favicon.ico"
+          alt="Google"
+          style={{ width: 18, height: 18, marginRight: 8 }}
+        />
+          Continue with Google
+        </a>
         <div className="auth-footer">
           <p>
             Don't have an account?{' '}

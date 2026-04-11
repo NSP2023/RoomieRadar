@@ -124,6 +124,7 @@ const register = async (userData) => {
 
   const value = {
     user,
+    setUser,
     loading,
     error,
     login,
