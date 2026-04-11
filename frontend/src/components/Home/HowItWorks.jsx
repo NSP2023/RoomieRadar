@@ -22,7 +22,7 @@ const faqData = [
   },
 ];
 
-// Lightweight intersection-observer hook — triggers once when element enters view
+//hook
 const useInView = (threshold = 0.15) => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -76,6 +76,7 @@ const HowItWorks = () => {
       <div className="container">
 
         {/* Title */}
+      
         <div
           ref={titleRef}
           className={`section-title fade-up ${titleVisible ? "visible" : ""}`}
@@ -110,7 +111,7 @@ const HowItWorks = () => {
           })}
         </div>
 
-        {/* CTA */}
+        
         <div
           ref={ctaRef}
           className={`cta-section fade-up ${ctaVisible ? "visible" : ""}`}
