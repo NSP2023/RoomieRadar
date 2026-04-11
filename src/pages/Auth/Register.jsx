@@ -1,6 +1,7 @@
 // src/pages/Auth/Register.jsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { User, Mail, Lock, UserPlus, Eye, EyeOff } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
@@ -9,6 +10,7 @@ import './Auth.css'; // ← keep your existing global auth styles
 const Register = () => {
   const navigate = useNavigate();
   const { register, error: authError, loading } = useAuth();
+  const [searchParams]=useSearchParams();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -56,11 +58,10 @@ const Register = () => {
         name: formData.name.trim(),
         email: formData.email.trim(),
         password: formData.password,
-        // ← add more fields later (age, gender, university, etc.)
       };
 
       await register(registerData);
-      navigate('/questionnaire'); // or '/dashboard' / '/profile/setup' — your choice
+      navigate('/questionnaire'); 
     } catch (err) {
       setLocalError(authError || 'Registration failed. Please try again.');
     }
@@ -194,7 +195,23 @@ const Register = () => {
           </form>
 
           <div className="divider"></div>
+          {searchParams.get('error') === 'only_iut_emails' && (
+            <div className="alert alert-error">
+              <span>⚠️</span> Only @iut-dhaka.edu emails are allowed.
+            </div>
+          )}
 
+          <div className="divider">
+            <span style={{color: 'var(--text-light)', fontSize: '0.85rem'}}>or </span>
+          </div>
+          <a href="http://localhost:5000/api/users/auth/google" className="auth-btn google-btn"> 
+          <img
+            src="https://www.google.com/favicon.ico"
+            alt=""
+            style={{ width: 18, height: 18 }}
+          />
+            Continue with Google
+          </a>
           <p className="auth-footer">
             Already a member?{' '}
             <Link to="/login" className="text-violet">
@@ -324,6 +341,26 @@ const Register = () => {
           align-items: center;
           gap: 8px;
         }
+        .google-oauth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid #ddd;
+            background: #fff;
+            color: #333;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            transition: background 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            margin-top: 0.5rem;
+          }
+          .google-oauth-btn:hover {
+            background: #f5f5f5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          }
       `}</style>
     </div>
   );

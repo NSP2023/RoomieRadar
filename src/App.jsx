@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import useAuth from './hooks/useAuth';
-
+import AuthCallback from './pages/Auth/AuthCallback'; 
 // Components
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
@@ -52,7 +52,7 @@ const App = () => {
               <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-
+              <Route path="/auth/callback" element={<AuthCallback />} />
               {/* Protected routes — require login */}
               <Route
                 path="/dashboard"
