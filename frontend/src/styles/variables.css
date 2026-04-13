@@ -1,0 +1,15 @@
+/* D:\RoomieRadar\frontend\src\styles\variables.css */
+:root {
+  --primary-color: #ff6f61;
+  --secondary-color: #34d197;
+  --text-color: #333;
+  --background-color: #f9fafb;
+  --card-background: #fff;
+  --font-family: 'Arial, sans-serif';
+  --border-radius: 10px;
+  --padding: 1.5rem;
+  --shadow: 0 2px 6px rgba(0,0,0,0.1);
+  --heading-font-size: 2rem;
+  --subheading-font-size: 1.5rem;
+  --button-padding: 0.5rem 1rem;
+}
