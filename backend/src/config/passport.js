@@ -41,8 +41,13 @@ passport.use(
         }
         let user = await UserModel.findOne({ googleId: profile.id });
         if (user) return done(null, user)
+        user = await UserModel.findOne({ email });
         if (user) {
           user.googleId = profile.id
+          if(!user.avatar|| user.avatar.includes('dicebear')) {
+            user.avatar = profile.photos[0]?.value || 
+          `https://api.dicebear.com/9.x/avataaars/svg?seed=${user._id}&backgroundColor=ffdfbf`
+          }
           await user.save()
           return done(null, user)
         }
@@ -50,7 +55,8 @@ passport.use(
           googleId: profile.id,
           name: profile.displayName,
           email,
-          avatar: profile.photos[0]?.value,
+          avatar: profile.photos[0]?.value ||
+            `https://api.dicebear.com/9.x/avataaars/svg?seed=${profile.id}&backgroundColor=ffdfbf`,
         })
         return done(null, user)
       } catch (err) {

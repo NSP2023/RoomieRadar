@@ -6,6 +6,8 @@ const User = require("../models/User");
 const RoommateMatch = require("../models/RoommateMatch");
 const {calculateCompatibility,generateConflictForecast,getBadge} = require("../services/compatibilityService");
 const {generateSimulation} = require("../services/simulationService");
+const cloudinary = require('../config/cloudinary');
+const upload = require('../middleware/multer');
 const router = express.Router();
 
 /* REGISTER */
@@ -369,4 +371,42 @@ router.get(
     res.redirect(`${process.env.CLIENT_URL}/auth/callback?token=${token}`)
   }
 )
+router.post(
+  '/avatar',
+  passport.authenticate('jwt', { session: false }),
+  upload.single('avatar'),
+  async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ success: false, message: 'No file uploaded' });
+      }
+
+      const user = await User.findById(req.user._id);
+
+      // Delete old Cloudinary image if it exists (to avoid storage buildup)
+      if (user.avatar && user.avatar.includes('cloudinary')) {
+        const publicId = user.avatar.split('/').slice(-2).join('/').split('.')[0];
+        await cloudinary.uploader.destroy(publicId).catch(() => {}); // silent fail
+      }
+
+      // Upload new image to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: 'roomieradar/avatars',
+        transformation: [{ width: 400, height: 400, crop: 'fill' }],
+      });
+
+      user.avatar = result.secure_url;
+      await user.save();
+
+      res.status(200).json({
+        success: true,
+        message: 'Avatar updated successfully',
+        avatar: result.secure_url,
+      });
+    } catch (error) {
+      console.error('Avatar upload error:', error);
+      res.status(500).json({ success: false, message: 'Failed to upload avatar' });
+    }
+  }
+);
 module.exports = router;

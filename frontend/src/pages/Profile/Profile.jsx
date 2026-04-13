@@ -24,7 +24,8 @@ const Profile = () => {
   const [saveMessage, setSaveMessage] = useState(null);
   const [error, setError] = useState(null);
   const [visibleQuestions, setVisibleQuestions] = useState(0);
-
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = React.useRef(null);
   const questions = questionnaireQuestions;
 
   const [profile, setProfile] = useState({
@@ -69,10 +70,10 @@ const Profile = () => {
           name:       user.name       || '',
           email:      user.email      || '',
           university: user.university || '',
-          department: user.department || '',   // ✅ from backend
-          year:       user.year       || '',   // ✅ from backend
-          hall:       user.hall       || '',   // ✅ from backend
-          age:        user.age        || '',   // ✅ from backend
+          department: user.department || '',   
+          year:       user.year       || '',   
+          hall:       user.hall       || '',   
+          age:        user.age        || '',   
           bio:        user.bio        || '',
           avatar:
             user.avatar ||
@@ -137,7 +138,34 @@ const mapped = {
     const { name, value } = e.target;
     setProfile((prev) => ({ ...prev, [name]: value }));
   };
+  
+  const handleAvatarUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
+    try {
+      setUploading(true);
+      setError(null);
+      const token = localStorage.getItem('token');
+      const formData = new FormData();
+      formData.append('avatar', file);
+
+      const res = await axios.post(`${API_BASE_URL}/users/avatar`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      setProfile((prev) => ({ ...prev, avatar: res.data.avatar }));
+      setSaveMessage('Profile picture updated! ♡');
+      setTimeout(() => setSaveMessage(null), 3000);
+    } catch (err) {
+      setError('Failed to upload image. Please try again.');
+    } finally {
+      setUploading(false);
+    }
+  };
   const handleAnswer = (field, score) => {
     if (!isEditing) return;
     setAnswers((prev) => ({ ...prev, [field]: score }));
@@ -182,6 +210,7 @@ const mapped = {
           year:       profile.year,
           hall:       profile.hall,
           lifestyle:  scoreToLifestyle(answers),
+          avatar:     profile.avatar,
         },
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
       );
@@ -232,9 +261,22 @@ const mapped = {
             <div className="avatar-wrapper">
               <img src={profile.avatar} alt="Your avatar" className="avatar-img" />
               {isEditing && (
-                <button className="change-avatar-btn" onClick={() => alert('Avatar upload coming soon! ♡')}>
-                  Change Avatar ✏️
-                </button>
+                <>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleAvatarUpload}
+                    accept="image/jpeg,image/jpg,image/png,image/gif"
+                    style={{ display: 'none' }}
+                  />
+                  <button
+                    className="change-avatar-btn"
+                    onClick={() => fileInputRef.current.click()}
+                    disabled={uploading}
+                  >
+                    {uploading ? 'Uploading... ⏳' : 'Change Avatar ✏️'}
+                  </button>
+                </>
               )}
             </div>
             <div className="basic-info">
