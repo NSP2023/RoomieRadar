@@ -204,14 +204,15 @@ const mapped = {
       const res = await axios.put(
         `${API_BASE_URL}/users/profile`,
         {
-          name:       profile.name,
-          bio:        profile.bio,
-          department: profile.department,
-          year:       profile.year,
-          hall:       profile.hall,
-          lifestyle:  scoreToLifestyle(answers),
-          avatar:     profile.avatar,
-        },
+  name:       profile.name,
+  bio:        profile.bio,
+  department: profile.department,
+  year:       profile.year,
+  hall:       profile.hall,
+  age:        profile.age ? Number(profile.age) : undefined,  // ← ADD THIS
+  lifestyle:  scoreToLifestyle(answers),
+  avatar:     profile.avatar,
+},
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
       );
 
@@ -292,13 +293,11 @@ const mapped = {
               ) : (
                 <h2 className="profile-name">{profile.name}</h2>
               )}
-              <div className="profile-meta">
-                <span>Age: {profile.age}</span>
-                <span>•</span>
-                <span>{profile.university}</span>
-                <span>•</span>
-                <span>{profile.hall || '—'}</span>
-              </div>
+             <div className="profile-meta">
+  {profile.age && <><span>Age: {profile.age}</span><span>•</span></>}
+  {profile.university && <><span>{profile.university}</span><span>•</span></>}
+  <span>{profile.hall || '—'}</span>
+</div>
             </div>
           </div>
 
@@ -330,11 +329,24 @@ const mapped = {
                 <div className="info-value">{profile.email}</div>
               </div>
 
-              {/* Age — from backend, read only */}
-              <div className="info-item">
-                <div className="info-label">Age</div>
-                <div className="info-value">{profile.age || '—'}</div>
-              </div>
+              {/* Age — editable */}
+<div className="info-item">
+  <div className="info-label">Age</div>
+  {isEditing ? (
+    <input
+      type="number"
+      name="age"
+      value={profile.age}
+      onChange={handleChange}
+      className="edit-input"
+      placeholder="e.g. 21"
+      min="17"
+      max="99"
+    />
+  ) : (
+    <div className="info-value">{profile.age || '—'}</div>
+  )}
+</div>
 
               {/* Department — from backend, editable */}
               <div className="info-item">
