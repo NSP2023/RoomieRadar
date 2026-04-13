@@ -181,16 +181,16 @@ const Login = () => {
             </div>
           </form>
         )}
-        <div className="auth-divider">
+        <div className="auth-divider" >
           <span>or</span>
         </div>
         <a href="http://localhost:5000/api/users/auth/google" className="auth-btn google-btn">
-        <img
-          src="https://www.google.com/favicon.ico"
-          alt="Google"
-          style={{ width: 18, height: 18 }}
-        />
-          Continue with Google
+          <img
+            src="https://www.google.com/favicon.ico"
+            alt="Google"
+            style={{ width: 30, height: 28}}
+          />
+          <p> Continue with Google</p> 
         </a>
         <div className="auth-footer">
           <p>

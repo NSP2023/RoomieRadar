@@ -231,6 +231,10 @@
   color: white;
 }
 
+.divider{
+  padding-left: 50%;
+}
+
 /* Error Alert */
 .alert.alert-error {
   background: #fff0f0;

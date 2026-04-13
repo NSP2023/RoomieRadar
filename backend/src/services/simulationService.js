@@ -52,7 +52,7 @@ const generateSimulation = (u, r) => {
 
   // Helper: pick a message based on two scores
   const sleepMsg = () => {
-    if (diff(uSleep, rSleep) === 0) return { emoji: '😴', text: 'You both naturally wake up at the same time — no awkward alarm battles this morning!', vibe: 'smooth' };
+    if (diff(uSleep, rSleep) === 0) return { emoji: '😁', text: 'You both naturally wake up at the same time — no awkward alarm battles this morning!', vibe: 'smooth' };
     if (uSleep >= 4 && rSleep <= 2) return { emoji: '😬', text: 'You\'re up and chirpy while your roomie is still deep in dreamland. Tiptoeing around the kitchen it is...', vibe: 'tension' };
     if (uSleep <= 2 && rSleep >= 4) return { emoji: '😴', text: 'Your roomie bounces out of bed while you\'re still hitting snooze. They\'re already making breakfast — the smell is helping though 🍳', vibe: 'minor' };
     return { emoji: '🌅', text: 'Slightly different wake-up times, but nothing a quick "good morning!" text from the kitchen can\'t fix.', vibe: 'minor' };
@@ -150,7 +150,7 @@ const generateSimulation = (u, r) => {
     activity:         e.title,
     emoji:            e.emoji,
     text:             e.text,
-    potentialConflict: e.vibe,   // 'smooth' | 'minor' | 'tension'
+    potentialConflict: e.vibe,   // smooth,minor,tension
     overallVibe,
   }));
 };

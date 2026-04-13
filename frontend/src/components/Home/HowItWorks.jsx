@@ -81,7 +81,7 @@ const HowItWorks = () => {
           ref={titleRef}
           className={`section-title fade-up ${titleVisible ? "visible" : ""}`}
         >
-          <span className="title-icon">🏠</span>
+          <span className="title-icon"></span>
           <h2>How It Works</h2>
           <p className="section-subtitle">
             Finding your perfect roommate is easier than you think ♡

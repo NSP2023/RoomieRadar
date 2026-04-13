@@ -1,5 +1,8 @@
+// backend/src/controllers/matchController.js
+
 const RoommateMatch = require('../models/RoommateMatch');
 const User = require('../models/User');
+const { generateTips } = require('../services/tipsService'); // ✅ only new import
 
 /**
  * GET /api/matches/top
@@ -54,7 +57,6 @@ const getSimulationController = async (req, res) => {
     const { roommateId } = req.params;
 
     const roommateMatch = await RoommateMatch.findOne({ user: userId });
-
     if (!roommateMatch) {
       return res.status(404).json({ success: false, message: 'No matches found for this user' });
     }
@@ -62,15 +64,32 @@ const getSimulationController = async (req, res) => {
     const match = roommateMatch.matches.find(
       (m) => m.roommate.toString() === roommateId
     );
-
     if (!match) {
       return res.status(404).json({ success: false, message: 'Match not found' });
     }
+
+    // Fetch both users' lifestyle to generate tips live
+    const [currentUser, roommateUser] = await Promise.all([
+      User.findById(userId).select('lifestyle'),
+      User.findById(roommateId).select('lifestyle'),
+    ]);
+
+    const conflictForecast = match.conflictForecast
+      ? Object.fromEntries(match.conflictForecast)
+      : {};
+
+    const tips = generateTips(
+      conflictForecast,
+      currentUser?.lifestyle || {},
+      roommateUser?.lifestyle || {}
+    );
 
     res.status(200).json({
       success: true,
       simulation: match.simulation || [],
       compatibilityScore: match.compatibilityScore || 0,
+      conflictForecast,
+      tips,
     });
   } catch (error) {
     console.error('Error fetching simulation:', error);
@@ -81,7 +100,6 @@ const getSimulationController = async (req, res) => {
 /**
  * POST /api/matches/compare
  * Returns profile + lifestyle data for a roommate to display in CompareView
- * Body: { roommate1Id }
  */
 const compareRoommatesController = async (req, res) => {
   try {
@@ -92,7 +110,6 @@ const compareRoommatesController = async (req, res) => {
       return res.status(400).json({ success: false, message: 'roommate1Id is required' });
     }
 
-    // Fetch the roommate's profile
     const roommate = await User.findById(roommate1Id).select(
       'name age university hall whatsapp avatar bio lifestyle'
     );
@@ -101,7 +118,6 @@ const compareRoommatesController = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Roommate not found' });
     }
 
-    // Look up stored compatibility score
     const roommateMatch = await RoommateMatch.findOne({ user: userId });
     let compatibilityScore = 0;
     if (roommateMatch) {
@@ -136,7 +152,6 @@ const compareRoommatesController = async (req, res) => {
 
 /**
  * GET /api/matches/discover
- * Returns other users for the swipe/discovery interface
  */
 const getDiscoveryUsersController = async (req, res) => {
   try {
@@ -146,7 +161,6 @@ const getDiscoveryUsersController = async (req, res) => {
       .select('name age university hall avatar bio lifestyle')
       .limit(20);
 
-    // Attach compatibility scores if they exist
     const roommateMatch = await RoommateMatch.findOne({ user: userId });
 
     const profiles = users.map((u) => {

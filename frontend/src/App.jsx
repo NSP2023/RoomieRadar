@@ -3,9 +3,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import useAuth from './hooks/useAuth';
 import AuthCallback from './pages/Auth/AuthCallback'; 
+
 // Components
 import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
 
 // Pages
 import Landing from './pages/Landing/Landing';
@@ -44,77 +44,74 @@ const App = () => {
       <div className="app-container">
         <Navbar />
 
-        <div className="main-layout">
-          <Sidebar />
+        <main className="main-content">
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
 
-          <main className="main-content">
-            <Routes>
-              {/* Public routes */}
-              <Route path="/" element={<Landing />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/how-it-works" element={<HowItWorks />} />
-              <Route path="/auth/callback" element={<AuthCallback />} />
-              {/* Protected routes — require login */}
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Protected routes — require login */}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
 
-              <Route
-                path="/questionnaire"
-                element={
-                  <ProtectedRoute>
-                    <Questionnaire />
-                  </ProtectedRoute>
-                }
-              />
+            <Route
+              path="/questionnaire"
+              element={
+                <ProtectedRoute>
+                  <Questionnaire />
+                </ProtectedRoute>
+              }
+            />
 
-              <Route
-                path="/matches"
-                element={
-                  <ProtectedRoute>
-                    <RoommateMatch />
-                  </ProtectedRoute>
-                }
-              />
+            <Route
+              path="/matches"
+              element={
+                <ProtectedRoute>
+                  <RoommateMatch />
+                </ProtectedRoute>
+              }
+            />
 
-              <Route
-                path="/simulation/:id"
-                element={
-                  <ProtectedRoute>
-                    <DaySimulation />
-                  </ProtectedRoute>
-                }
-              />
+            <Route
+              path="/simulation/:id"
+              element={
+                <ProtectedRoute>
+                  <DaySimulation />
+                </ProtectedRoute>
+              }
+            />
 
-              <Route
-                path="/compare/:id"
-                element={
-                  <ProtectedRoute>
-                    <CompareView />
-                  </ProtectedRoute>
-                }
-              />
+            <Route
+              path="/compare/:id"
+              element={
+                <ProtectedRoute>
+                  <CompareView />
+                </ProtectedRoute>
+              }
+            />
 
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                }
-              />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Fallback */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </main>
-        </div>
+            {/* Fallback */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
       </div>
     </Router>
   );

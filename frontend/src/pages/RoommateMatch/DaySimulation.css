@@ -373,3 +373,51 @@
   .vibe-scoreboard { gap: 0.8rem; }
   .page-title { font-size: 2rem; }
 }
+
+
+/* ── Inline tips inside timeline cards ── */
+.inline-tips {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.inline-tip {
+  border: 1.5px solid;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+}
+
+.inline-tip-top {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.4rem;
+}
+
+.inline-tip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.inline-tip-emoji {
+  font-size: 1rem;
+}
+
+.inline-tip-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #5c4b51;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.inline-tip-text {
+  font-size: 0.88rem;
+  color: #6d5c5c;
+  line-height: 1.55;
+  margin: 0;
+}

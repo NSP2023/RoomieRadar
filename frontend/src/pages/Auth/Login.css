@@ -16,6 +16,20 @@
   --shadow-playful: 0 14px 40px rgba(255, 123, 140, 0.25);
 }
 
+.auth-btn.google-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.auth-divider{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1.5rem 0;
+  padding-left: 50%;
+}
 .auth-page {
   min-height: 100vh;
   background: linear-gradient(145deg, var(--warm-peach) 0%, #fff0e6 45%, var(--light-coral) 100%);
@@ -26,9 +40,9 @@
   font-family: 'Nunito', system-ui, sans-serif;
   position: relative;
   overflow: hidden;
+
 }
 
-/* Floating kawaii decorations */
 .auth-page::before,
 .auth-page::after {
   content: '🐻';
@@ -274,6 +288,8 @@
   color: #ff5a6f;
   text-decoration: underline;
 }
+
+
 
 /* Responsive */
 @media (max-width: 480px) {

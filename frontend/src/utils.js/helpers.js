@@ -1,24 +1,55 @@
 // src/utils/helpers.js
 
 /**
- * Maps frontend numeric scores (1-10) to backend-compatible Enum strings.
- * This bridges the gap between the UI sliders/radios and the Database Schema.
- * 
+ * Maps frontend numeric scores (1, 3, 4, 5) to backend-compatible Enum strings.
+ * Score scale: 5 = highest/best, 4 = second, 3 = third, 1 = lowest
+ *
  * @param {string} field - The lifestyle category (e.g., 'sleep', 'cleanliness')
- * @param {number} score - The numeric score from the frontend questionnaire
+ * @param {number} score - The numeric score from the frontend questionnaire (1, 3, 4, or 5)
  * @returns {string} The Enum value expected by the backend
  */
 export const mapScoreToBackendEnum = (field, score) => {
   if (field === 'sleep') {
-    if (score >= 8) return 'Early';
-    if (score <= 4) return 'Late';
-    return 'Flexible';
+    // 5 = Early bird, 4 = Flexible, 3 = Night owl, 1 = Night owl (extreme)
+    if (score >= 5) return 'Early';
+    if (score === 4) return 'Flexible';
+    return 'Late'; // scores 1 and 3
   }
-  
-  // Default mapping for cleanliness, noiseTolerance, guests, etc.
-  if (score >= 8) return 'High';
-  if (score <= 4) return 'Low';
-  return 'Medium';
+
+  if (field === 'pets') {
+    // 5 = loves pets (Yes), 4 = okay with them (Maybe), 3 = neutral (Flexible), 1 = no pets (No)
+    if (score >= 5) return 'Yes';
+    if (score === 4) return 'Maybe';
+    if (score === 3) return 'Flexible';
+    return 'No'; // score 1
+  }
+
+  if (field === 'conflict') {
+    // 5 = talks right away (Immediate), 4 = waits then talks (Calm), 3 or 1 = avoids (Avoidant)
+    if (score >= 5) return 'Immediate';
+    if (score === 4) return 'Calm';
+    return 'Avoidant'; // scores 1 and 3
+  }
+
+  if (field === 'guests') {
+    // 5 = often, 4 or 3 = sometimes, 1 = rarely
+    if (score >= 5) return 'Often';
+    if (score >= 3) return 'Sometimes';
+    return 'Rarely'; // score 1
+  }
+
+  if (field === 'sharing') {
+    // 5 = fully shared, 4 or 3 = flexible, 1 = private
+    if (score >= 5) return 'Shared';
+    if (score >= 3) return 'Flexible';
+    return 'Private'; // score 1
+  }
+
+  // Default for cleanliness and noiseTolerance:
+  // 5 = High, 4 = Medium, 3 or 1 = Low
+  if (score >= 5) return 'High';
+  if (score === 4) return 'Medium';
+  return 'Low'; // scores 1 and 3
 };
 
 /**
@@ -35,7 +66,7 @@ export const calculateCompatibility = (userA, userB) => {
 
   // Sleep
   if (userA.sleep && userB.sleep) {
-    score += userA.sleep === userB.sleep ? 25 : 5; // exact match = high points
+    score += userA.sleep === userB.sleep ? 25 : 5;
     totalFactors += 25;
   }
 
@@ -51,22 +82,24 @@ export const calculateCompatibility = (userA, userB) => {
     totalFactors += 20;
   }
 
-  // Pets (if exists)
+  // Pets
   if (userA.pets && userB.pets) {
-    score += userA.pets === userB.pets ? 15 : (userA.pets === 'Flexible' || userB.pets === 'Flexible' ? 10 : 3);
+    score += userA.pets === userB.pets
+      ? 15
+      : (userA.pets === 'Flexible' || userB.pets === 'Flexible' ? 10 : 3);
     totalFactors += 15;
   }
 
   // Smoking (if exists)
   if (userA.smoking && userB.smoking) {
-    score += userA.smoking === userB.smoking ? 15 : (userA.smoking === 'Flexible' || userB.smoking === 'Flexible' ? 10 : 3);
+    score += userA.smoking === userB.smoking
+      ? 15
+      : (userA.smoking === 'Flexible' || userB.smoking === 'Flexible' ? 10 : 3);
     totalFactors += 15;
   }
 
-  // If no factors were compared, return 0
   if (totalFactors === 0) return 0;
 
-  // Normalize to 0–100
   return Math.round((score / totalFactors) * 100);
 };
 
@@ -117,7 +150,7 @@ export const formatLifestyle = (category, value) => {
     noiseTolerance: {
       Low: 'Prefers quiet',
       Medium: 'Some noise is okay',
-      High: 'Noise doesn’t bother me',
+      High: "Noise doesn't bother me",
     },
     pets: {
       Yes: 'Has pets / wants pets',
