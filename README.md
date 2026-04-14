@@ -19,14 +19,16 @@ RoomieRadar is a full-stack MERN web application that helps users find compatibl
 * One-day shared living simulation
 
 ### Roommate Match System
-<img width="1905" height="870" alt="image" src="https://github.com/user-attachments/assets/9f8b8b6a-b005-4de2-9e50-117bf69673c2" />
+<img width="1548" height="867" alt="image" src="https://github.com/user-attachments/assets/0cf3b094-8064-4bdf-a160-f02b8e3deb44" />
+
 
 
 * List of potential roommates with compatibility scores
 * Highlighted top matches with badges
 * Clickable profile cards with detailed daily simulations
 * Optional side-by-side roommate comparison
-<img width="1885" height="856" alt="image" src="https://github.com/user-attachments/assets/087b5858-91e8-44b4-8b5a-d4882510bbfc" />
+<img width="1677" height="865" alt="image" src="https://github.com/user-attachments/assets/32dc05f5-7d31-406d-89cc-b44b29d1a436" />
+
 
 
 ### UI & Interaction
@@ -62,7 +64,6 @@ RoomieRadar is a full-stack MERN web application that helps users find compatibl
 
 * Vercel
 * Render
-* Heroku
 
 ---
 
@@ -154,5 +155,5 @@ Islamic University of Technology (IUT)
 
 ## 📄 License
 
-This project is licensed under the **MIT License**.
+This project is licensed under the **MIT License**
 
