@@ -1,4 +1,5 @@
-<img width="1897" height="871" alt="image" src="https://github.com/user-attachments/assets/9f4292f5-49c4-438b-8822-47e27756844c" />
+<img width="1620" height="855" alt="image" src="https://github.com/user-attachments/assets/8ccb30ee-b0ed-446b-8539-eba1538f4f1b" />
+
 
 **Roommate Compatibility Checker**
 
